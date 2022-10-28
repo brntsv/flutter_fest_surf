@@ -1,21 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_fest_surf/ui/my_app/app.dart';
 
-import 'package:flutter_fest_surf/screens/timetable_screen.dart';
+import 'package:flutter_fest_surf/ui/screens/timetable_screen.dart';
 
 void main() {
   runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const TimetableScreen(),
-    );
-  }
 }
