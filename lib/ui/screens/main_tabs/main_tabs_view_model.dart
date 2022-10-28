@@ -5,7 +5,8 @@ class MainTabsViewModel extends ChangeNotifier {
 
   int get currentTabIndex => _currentTabIndex;
 
-  set currentTabIndex(int value) {
+  void setCurrentTabIndex(int value) {
     _currentTabIndex = value;
+    notifyListeners();
   }
 }
