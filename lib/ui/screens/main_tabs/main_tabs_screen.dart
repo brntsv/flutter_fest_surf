@@ -1,8 +1,8 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
 import 'package:flutter_fest_surf/resources/resources.dart';
 import 'package:flutter_fest_surf/ui/screens/main_tabs/main_tabs_view_model.dart';
+import 'package:flutter_fest_surf/ui/screens/main_tabs/schedule_widget.dart';
 import 'package:provider/provider.dart';
 
 class MainTabsScreen extends StatelessWidget {
@@ -10,41 +10,43 @@ class MainTabsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return const Scaffold(
+      body: _BodyWidget(),
+      bottomNavigationBar: _BottomNavBarWidget(),
+    );
+  }
+}
+
+class _BodyWidget extends StatelessWidget {
+  const _BodyWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     final currentIndex =
         context.select((MainTabsViewModel vm) => vm.currentTabIndex);
-    return Scaffold(
-      body: IndexedStack(
-        index: currentIndex,
-        children: const [
-          Center(
-            child: Text(
-              '1',
-              style: TextStyle(color: Colors.white),
-            ),
+    return IndexedStack(
+      index: currentIndex,
+      children: const [
+        ScheduleWidget(),
+        Center(
+          child: Text(
+            '2',
+            style: TextStyle(color: Colors.white),
           ),
-          Center(
-            child: Text(
-              '2',
-              style: TextStyle(color: Colors.white),
-            ),
+        ),
+        Center(
+          child: Text(
+            '3',
+            style: TextStyle(color: Colors.white),
           ),
-          Center(
-            child: Text(
-              '3',
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
-        ],
-      ),
-      bottomNavigationBar: const _BottomNavBarWidget(),
+        ),
+      ],
     );
   }
 }
 
 class _BottomNavBarWidget extends StatelessWidget {
-  const _BottomNavBarWidget({
-    Key? key,
-  }) : super(key: key);
+  const _BottomNavBarWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
