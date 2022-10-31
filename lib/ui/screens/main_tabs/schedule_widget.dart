@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_fest_surf/resources/resources.dart';
+import 'package:flutter_fest_surf/ui/widgets/schedule_row/schedule_row_widget.dart';
 
 class ScheduleWidget extends StatelessWidget {
   const ScheduleWidget({Key? key}) : super(key: key);
@@ -22,14 +23,9 @@ class ScheduleWidget extends StatelessWidget {
           ),
           SliverList(
             delegate: SliverChildListDelegate([
-              Container(color: Colors.pink, height: 150),
-              Container(color: Colors.green, height: 150),
-              Container(color: Colors.blue, height: 150),
-              Container(color: Colors.deepPurple, height: 150),
-              Container(color: Colors.pink, height: 150),
-              Container(color: Colors.green, height: 150),
-              Container(color: Colors.blue, height: 150),
-              Container(color: Colors.deepPurple, height: 150),
+              ScheduleRowWidget.single(),
+              ScheduleRowWidget.single(),
+              ScheduleRowWidget.single(),
             ]),
           )
         ],

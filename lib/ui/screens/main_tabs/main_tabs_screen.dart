@@ -58,7 +58,7 @@ class _BottomNavBarWidget extends StatelessWidget {
 
     final buttons = [
       _BottomNavigationBarItemFactory(AppImages.tabbarCalendar),
-      _BottomNavigationBarItemFactory(AppImages.tabbarBookmark),
+      _BottomNavigationBarItemFactory(AppImages.bookmark),
       _BottomNavigationBarItemFactory(AppImages.tabbarPoint),
     ]
         .asMap()
