@@ -6,8 +6,6 @@ class ScheduleWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ddd = MediaQuery.of(context).padding.top;
-
     return DecoratedBox(
       decoration: const BoxDecoration(
         image: DecorationImage(
@@ -91,19 +89,63 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
     double shrinkOffset,
     bool overlapsContent,
   ) {
-    return ColoredBox(
-      color: Colors.white,
-      child: Column(
-        children: [
-          const Expanded(child: SizedBox()),
-          Text('$shrinkOffset, $overlapsContent'),
-        ],
-      ),
-    );
+    return const _SectionChipsWidget();
   }
 
   @override
   bool shouldRebuild(_SliverAppBarDelegate oldDelegate) {
     return false;
+  }
+}
+
+class _SectionChipsWidget extends StatelessWidget {
+  const _SectionChipsWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.separated(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      itemCount: 10,
+      itemBuilder: (context, index) {
+        return Center(
+          child: SizedBox(
+            height: 36,
+            child: ElevatedButton(
+              onPressed: () {},
+              style: ButtonStyle(
+                foregroundColor: MaterialStateProperty.all(Colors.white),
+                elevation: MaterialStateProperty.all(0),
+                minimumSize: MaterialStateProperty.all(Size.zero),
+                padding: MaterialStateProperty.all(EdgeInsets.zero),
+                shape: MaterialStateProperty.all(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18.0),
+                  ),
+                ),
+              ),
+              child: Ink(
+                decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [Colors.green, Colors.blue],
+                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(80.0))),
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Text('Секция $index'),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+      scrollDirection: Axis.horizontal,
+      separatorBuilder: (context, index) {
+        return const SizedBox(
+          width: 10,
+        );
+      },
+    );
   }
 }
