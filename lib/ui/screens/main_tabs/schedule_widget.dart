@@ -1,4 +1,6 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+
 import 'package:flutter_fest_surf/resources/resources.dart';
 
 class ScheduleWidget extends StatelessWidget {
@@ -6,61 +8,58 @@ class ScheduleWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DecoratedBox(
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage(AppImages.toplogoGradient),
-          fit: BoxFit.none,
-          alignment: Alignment.topLeft,
-        ),
-      ),
-      child: SafeArea(
-        child: CustomScrollView(
-          physics: const BouncingScrollPhysics(),
-          slivers: [
-            const _LogoWidget(),
-            SliverPersistentHeader(
-              pinned: true,
-              delegate: _SliverAppBarDelegate(),
-            ),
-            SliverList(
-              delegate: SliverChildListDelegate([
-                Container(color: Colors.pink, height: 150),
-                Container(color: Colors.green, height: 150),
-                Container(color: Colors.blue, height: 150),
-                Container(color: Colors.deepPurple, height: 150),
-                Container(color: Colors.pink, height: 150),
-                Container(color: Colors.green, height: 150),
-                Container(color: Colors.blue, height: 150),
-                Container(color: Colors.deepPurple, height: 150),
-              ]),
-            )
-          ],
-        ),
+    final topInset = MediaQuery.of(context).padding.top;
+
+    return SafeArea(
+      top: false,
+      child: CustomScrollView(
+        physics: const BouncingScrollPhysics(),
+        slivers: [
+          const _LogoWidget(),
+          SliverPersistentHeader(
+            pinned: true,
+            delegate: _SliverAppBarDelegate(topInset: topInset),
+          ),
+          SliverList(
+            delegate: SliverChildListDelegate([
+              Container(color: Colors.pink, height: 150),
+              Container(color: Colors.green, height: 150),
+              Container(color: Colors.blue, height: 150),
+              Container(color: Colors.deepPurple, height: 150),
+              Container(color: Colors.pink, height: 150),
+              Container(color: Colors.green, height: 150),
+              Container(color: Colors.blue, height: 150),
+              Container(color: Colors.deepPurple, height: 150),
+            ]),
+          )
+        ],
       ),
     );
   }
 }
 
 class _LogoWidget extends StatelessWidget {
-  const _LogoWidget({
-    Key? key,
-  }) : super(key: key);
+  const _LogoWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
       child: SizedBox(
-        height: 220,
+        height: 204,
         child: Stack(
           children: [
             Positioned(
-              top: 60,
+              top: 0,
+              left: 0,
+              child: Image.asset(AppImages.toplogoGradient),
+            ),
+            Positioned(
+              top: 84,
               left: 20,
               child: Image.asset(AppImages.toplogoFlutterFest),
             ),
             Positioned(
-              top: 41,
+              top: 65,
               right: 20,
               child: Image.asset(AppImages.toplogoSurf),
             ),
@@ -73,15 +72,18 @@ class _LogoWidget extends StatelessWidget {
 
 class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   final double _height = 56;
+  final double topInset;
+
+  _SliverAppBarDelegate({required this.topInset});
 
   // final double topInset;
 
   // _SliverAppBarDelegate({required this.topInset});
 
   @override
-  double get minExtent => _height;
+  double get minExtent => _height + topInset;
   @override
-  double get maxExtent => _height;
+  double get maxExtent => _height + topInset;
 
   @override
   Widget build(
@@ -89,7 +91,7 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
     double shrinkOffset,
     bool overlapsContent,
   ) {
-    return const _SectionChipsWidget();
+    return _SectionChipsWidget(topInset: topInset);
   }
 
   @override
@@ -99,53 +101,73 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
 }
 
 class _SectionChipsWidget extends StatelessWidget {
-  const _SectionChipsWidget({Key? key}) : super(key: key);
+  final double topInset;
+  const _SectionChipsWidget({Key? key, required this.topInset})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      itemCount: 10,
-      itemBuilder: (context, index) {
-        return Center(
-          child: SizedBox(
-            height: 36,
-            child: ElevatedButton(
-              onPressed: () {},
-              style: ButtonStyle(
-                foregroundColor: MaterialStateProperty.all(Colors.white),
-                elevation: MaterialStateProperty.all(0),
-                minimumSize: MaterialStateProperty.all(Size.zero),
-                padding: MaterialStateProperty.all(EdgeInsets.zero),
-                shape: MaterialStateProperty.all(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18.0),
+    const totalItem = 4; // всего chips
+    const itemGradientWidth = 2.0;
+    const halfItemGradientWidth = itemGradientWidth / 2;
+    const endGradientPoint =
+        totalItem * itemGradientWidth + halfItemGradientWidth;
+
+    return ColoredBox(
+      color: Theme.of(context).scaffoldBackgroundColor,
+      child: ListView.separated(
+        physics: const BouncingScrollPhysics(),
+        padding: EdgeInsets.only(left: 20, right: 20, top: topInset),
+        itemCount: totalItem,
+        itemBuilder: (context, index) {
+          final currentGradientStartPoint =
+              index * itemGradientWidth + halfItemGradientWidth;
+          final currentGradientEndPoint =
+              endGradientPoint - currentGradientStartPoint;
+
+          return Center(
+            child: SizedBox(
+              height: 36,
+              child: ElevatedButton(
+                onPressed: () {},
+                style: ButtonStyle(
+                  foregroundColor: MaterialStateProperty.all(Colors.white),
+                  elevation: MaterialStateProperty.all(0),
+                  minimumSize: MaterialStateProperty.all(Size.zero),
+                  padding: MaterialStateProperty.all(EdgeInsets.zero),
+                  shape: MaterialStateProperty.all(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18.0),
+                    ),
                   ),
                 ),
-              ),
-              child: Ink(
-                decoration: const BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [Colors.green, Colors.blue],
+                child: Ink(
+                  decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment(-currentGradientStartPoint, 0.0),
+                        end: Alignment(currentGradientEndPoint, 0.0),
+                        colors: const [Color(0xFF00BD13), Color(0xFF170AF4)],
+                      ),
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(80.0))),
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Text('Секция $index'),
                     ),
-                    borderRadius: BorderRadius.all(Radius.circular(80.0))),
-                child: Center(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Text('Секция $index'),
                   ),
                 ),
               ),
             ),
-          ),
-        );
-      },
-      scrollDirection: Axis.horizontal,
-      separatorBuilder: (context, index) {
-        return const SizedBox(
-          width: 10,
-        );
-      },
+          );
+        },
+        scrollDirection: Axis.horizontal,
+        separatorBuilder: (context, index) {
+          return const SizedBox(
+            width: 10,
+          );
+        },
+      ),
     );
   }
 }
