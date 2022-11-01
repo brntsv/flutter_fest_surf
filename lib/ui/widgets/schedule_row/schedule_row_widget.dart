@@ -16,9 +16,16 @@ class _ScheduleSingleLectureWidget extends ScheduleRowWidget {
 
   @override
   Widget build(BuildContext context) {
+    final configuration = ScheduleRowLectureWidgetConfiguration(
+        avatarUrl:
+            'https://hiphop4real.com/wp-content/uploads/2017/06/YUriy-Dud.jpg',
+        speakerName: 'Юрий Дудь',
+        lectureTitle: 'Субъективность в оценке дизайна',
+        isFavourite: true,
+        status: ScheduleRowLectureWidgetConfigurationProgressStatus.current);
     return Row(
-      children: const [
-        ScheduleRowLectureWidget(),
+      children: [
+        ScheduleRowLectureWidget(configuration: configuration),
       ],
     );
   }
