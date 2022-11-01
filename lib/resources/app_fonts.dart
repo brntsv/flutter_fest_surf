@@ -1,7 +1,7 @@
 class AppFonts {
   AppFonts._();
 
-  static const String basisGrotesqueProFont =
-      'assets/fonts/BasisGrotesquePro-Regular.ttf';
-  static const String steinbeckFont = 'assets/fonts/Steinbeck-Regular.otf';
+  static const String basisGrotesqueProRegular =
+      'assets/fonts/basis_grotesque_pro/regular.ttf';
+  static const String steinbeckRegular = 'assets/fonts/steinbeck_regular.ttf';
 }
