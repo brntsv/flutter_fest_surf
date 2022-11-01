@@ -16,16 +16,16 @@ class _ScheduleSingleLectureWidget extends ScheduleRowWidget {
 
   @override
   Widget build(BuildContext context) {
-    final configuration = ScheduleRowLectureWidgetConfiguration(
+    const configuration = ScheduleRowLectureWidgetConfiguration(
         avatarUrl:
             'https://hiphop4real.com/wp-content/uploads/2017/06/YUriy-Dud.jpg',
         speakerName: 'Юрий Дудь',
         lectureTitle: 'Субъективность в оценке дизайна',
-        isFavourite: true,
+        isFavourite: false,
         status: ScheduleRowLectureWidgetConfigurationProgressStatus.current);
     return Row(
-      children: [
-        ScheduleRowLectureWidget(configuration: configuration),
+      children: const [
+        Expanded(child: ScheduleRowLectureWidget(configuration: configuration)),
       ],
     );
   }
@@ -38,4 +38,11 @@ class _ScheduleMultiLectureWidget extends ScheduleRowWidget {
   Widget build(BuildContext context) {
     return Container();
   }
+}
+
+// enum, который описывает статус лекции
+enum ScheduleRowLectureWidgetConfigurationProgressStatus {
+  past,
+  current,
+  coming
 }

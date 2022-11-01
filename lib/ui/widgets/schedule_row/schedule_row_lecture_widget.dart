@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_fest_surf/resources/app_fonts.dart';
 import 'package:flutter_fest_surf/resources/resources.dart';
+import 'package:flutter_fest_surf/ui/widgets/schedule_row/schedule_row_widget.dart';
 
 class ScheduleRowLectureWidget extends StatelessWidget {
   final ScheduleRowLectureWidgetConfiguration configuration;
@@ -15,7 +16,14 @@ class ScheduleRowLectureWidget extends StatelessWidget {
       padding: const EdgeInsets.only(top: 4, left: 16, right: 8, bottom: 16),
       margin: const EdgeInsets.only(top: 20, left: 20, right: 20),
       decoration: BoxDecoration(
-          color: Theme.of(context).cardColor,
+          color: configuration._style.widgetBackground,
+          // gradient: RadialGradient(
+          //   colors: [
+          //     const Color(0xFF00BD13),
+          //     configuration._style.widgetBackground,
+          //   ],
+          //   center: Alignment.topRight,
+          // ),
           borderRadius: const BorderRadius.all(
             Radius.circular(20),
           )),
@@ -28,7 +36,7 @@ class ScheduleRowLectureWidget extends StatelessWidget {
                   child: _SpeakerWidget(
                 configuration: configuration,
               )),
-              _FavouriteButton(
+              _FavouriteWidget(
                 configuration: configuration,
               ),
             ],
@@ -63,8 +71,8 @@ class _SpeakerWidget extends StatelessWidget {
             overflow: TextOverflow.fade,
             maxLines: 1,
             softWrap: false,
-            style: const TextStyle(
-              color: Colors.white,
+            style: TextStyle(
+              color: configuration._style.speakerNameColor,
               fontSize: 14,
               fontFamily: AppFonts.basisGrotesqueProRegular,
               fontWeight: FontWeight.w500,
@@ -77,20 +85,21 @@ class _SpeakerWidget extends StatelessWidget {
   }
 }
 
-class _FavouriteButton extends StatelessWidget {
+class _FavouriteWidget extends StatelessWidget {
   final ScheduleRowLectureWidgetConfiguration configuration;
-  const _FavouriteButton({Key? key, required this.configuration})
+  const _FavouriteWidget({Key? key, required this.configuration})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final icon =
-        configuration.isFavourite ? AppImages.bookmarkFull : AppImages.bookmark;
     return IconButton(
       splashColor: Colors.transparent,
       highlightColor: Colors.transparent,
       onPressed: () {},
-      icon: Image.asset(icon),
+      icon: Image.asset(
+        configuration._favouriteStyle.favouriteButtonIcon,
+        color: configuration._favouriteStyle.favouriteButtonColor,
+      ),
     );
   }
 }
@@ -108,7 +117,7 @@ class _DescriptionWidget extends StatelessWidget {
         overflow: TextOverflow.ellipsis,
         maxLines: 2,
         style: TextStyle(
-          color: Colors.white.withOpacity(0.88),
+          color: configuration._style.lectureTitleColor,
           fontSize: 18,
           fontFamily: AppFonts.steinbeckRegular,
           fontWeight: FontWeight.w400,
@@ -117,13 +126,6 @@ class _DescriptionWidget extends StatelessWidget {
       ),
     );
   }
-}
-
-// enum, который описывает статус лекции
-enum ScheduleRowLectureWidgetConfigurationProgressStatus {
-  past,
-  current,
-  coming
 }
 
 //класс для стилей лекции, зависящих от статуса лекции
@@ -139,6 +141,19 @@ class _ScheduleRowLectureWidgetConfigurationStyle {
   });
 }
 
+// стили для избранных лекций
+class _ScheduleRowLectureWidgetConfigurationFavouriteStyle {
+  final Color? favouriteButtonColor;
+  final Color? backgroundGradientColor;
+  final String favouriteButtonIcon;
+
+  const _ScheduleRowLectureWidgetConfigurationFavouriteStyle({
+    required this.favouriteButtonColor,
+    required this.backgroundGradientColor,
+    required this.favouriteButtonIcon,
+  });
+}
+
 //конфигуратор всех параметров лекции
 class ScheduleRowLectureWidgetConfiguration {
   final String avatarUrl;
@@ -148,7 +163,7 @@ class ScheduleRowLectureWidgetConfiguration {
   // статус прогресса
   final ScheduleRowLectureWidgetConfigurationProgressStatus status;
 
-  // стиль виджета зависит от статуса
+  // геттер, стиль виджета зависит от статуса
   _ScheduleRowLectureWidgetConfigurationStyle get _style {
     switch (status) {
       case ScheduleRowLectureWidgetConfigurationProgressStatus.past:
@@ -158,6 +173,10 @@ class ScheduleRowLectureWidgetConfiguration {
         return comingStyle;
     }
   }
+
+  // геттер на избранное, смена стиля при нажатии на букмарк
+  _ScheduleRowLectureWidgetConfigurationFavouriteStyle get _favouriteStyle =>
+      isFavourite ? isFavouriteStyle : isNotFavouriteStyle;
 
   const ScheduleRowLectureWidgetConfiguration({
     required this.avatarUrl,
@@ -178,5 +197,19 @@ class ScheduleRowLectureWidgetConfiguration {
     widgetBackground: Color(0xFF101115),
     speakerNameColor: Color(0xFF52525E),
     lectureTitleColor: Colors.white,
+  );
+
+  static const isFavouriteStyle =
+      _ScheduleRowLectureWidgetConfigurationFavouriteStyle(
+    favouriteButtonColor: Color(0xFF00BD13),
+    backgroundGradientColor: Color(0xFF00BD13),
+    favouriteButtonIcon: AppImages.bookmarkFull,
+  );
+
+  static const isNotFavouriteStyle =
+      _ScheduleRowLectureWidgetConfigurationFavouriteStyle(
+    favouriteButtonColor: null,
+    backgroundGradientColor: null,
+    favouriteButtonIcon: AppImages.bookmark,
   );
 }
