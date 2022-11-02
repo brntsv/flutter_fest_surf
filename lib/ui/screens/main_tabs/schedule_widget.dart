@@ -2,6 +2,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_fest_surf/resources/resources.dart';
+import 'package:flutter_fest_surf/ui/themes/app_text_style.dart';
+import 'package:flutter_fest_surf/ui/themes/app_theme.dart';
+import 'package:flutter_fest_surf/ui/widgets/schedule_row/schedule_row_break_widget.dart';
 import 'package:flutter_fest_surf/ui/widgets/schedule_row/schedule_row_widget.dart';
 
 class ScheduleWidget extends StatelessWidget {
@@ -22,11 +25,22 @@ class ScheduleWidget extends StatelessWidget {
             delegate: _SliverAppBarDelegate(topInset: topInset),
           ),
           SliverList(
-            delegate: SliverChildListDelegate([
-              ScheduleRowWidget.single(),
-              ScheduleRowWidget.single(),
-              ScheduleRowWidget.single(),
-            ]),
+            delegate: SliverChildBuilderDelegate(
+              (context, index) {
+                if ((index + 1) % 3 == 0) {
+                  return const Padding(
+                    padding: EdgeInsets.only(left: 14, right: 14, top: 16),
+                    child:
+                        SizedBox(height: 70, child: ScheduleRowBreakWidget()),
+                  );
+                }
+                return Padding(
+                  padding: const EdgeInsets.only(top: 16, left: 20, right: 20),
+                  child: ScheduleRowWidget.single(),
+                );
+              },
+              childCount: 10,
+            ),
           )
         ],
       ),
@@ -142,14 +156,17 @@ class _SectionChipsWidget extends StatelessWidget {
                       gradient: LinearGradient(
                         begin: Alignment(-currentGradientStartPoint, 0.0),
                         end: Alignment(currentGradientEndPoint, 0.0),
-                        colors: const [Color(0xFF00BD13), Color(0xFF170AF4)],
+                        colors: const [AppColors.green, AppColors.blue],
                       ),
                       borderRadius:
                           const BorderRadius.all(Radius.circular(80.0))),
                   child: Center(
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: Text('Секция $index'),
+                      child: Text(
+                        'Секция $index',
+                        style: AppTextStyle.bookText,
+                      ),
                     ),
                   ),
                 ),
