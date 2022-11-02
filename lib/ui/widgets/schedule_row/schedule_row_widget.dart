@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_fest_surf/ui/widgets/schedule_row/schedule_row_lecture_widget.dart';
+import 'package:flutter_fest_surf/ui/widgets/schedule_row/schedule_row_time_widget.dart';
 
 abstract class ScheduleRowWidget extends StatelessWidget {
   const ScheduleRowWidget({Key? key}) : super(key: key);
@@ -16,17 +17,30 @@ class _ScheduleSingleLectureWidget extends ScheduleRowWidget {
 
   @override
   Widget build(BuildContext context) {
-    const configuration = ScheduleRowLectureWidgetConfiguration(
-        avatarUrl:
-            'https://hiphop4real.com/wp-content/uploads/2017/06/YUriy-Dud.jpg',
-        speakerName: 'Юрий Дудь',
-        lectureTitle: 'Субъективность в оценке дизайна',
-        isFavourite: false,
-        status: ScheduleRowLectureWidgetConfigurationProgressStatus.current);
-    return Row(
-      children: const [
-        Expanded(child: ScheduleRowLectureWidget(configuration: configuration)),
-      ],
+    const progressStatus = ScheduleRowWidgetConfigurationProgressStatus.coming;
+    const configLecture = ScheduleRowLectureWidgetConfiguration(
+      avatarUrl:
+          'https://hiphop4real.com/wp-content/uploads/2017/06/YUriy-Dud.jpg',
+      speakerName: 'Юрий Дудь',
+      lectureTitle: 'Субъективность в оценке дизайна',
+      isFavourite: false,
+      status: progressStatus,
+    );
+
+    const configTime = ScheduleRowTimeWidgetConfiguration(
+      startTime: '8:00',
+      endTime: '10:00',
+      status: progressStatus,
+    );
+
+    return IntrinsicHeight(
+      child: Row(
+        children: const [
+          ScheduleRowTimeWidget(configuration: configTime),
+          Expanded(
+              child: ScheduleRowLectureWidget(configuration: configLecture)),
+        ],
+      ),
     );
   }
 }
@@ -41,8 +55,4 @@ class _ScheduleMultiLectureWidget extends ScheduleRowWidget {
 }
 
 // enum, который описывает статус лекции
-enum ScheduleRowLectureWidgetConfigurationProgressStatus {
-  past,
-  current,
-  coming
-}
+enum ScheduleRowWidgetConfigurationProgressStatus { past, current, coming }

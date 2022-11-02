@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_fest_surf/resources/app_fonts.dart';
 import 'package:flutter_fest_surf/resources/resources.dart';
+import 'package:flutter_fest_surf/ui/themes/app_text_style.dart';
+import 'package:flutter_fest_surf/ui/themes/app_theme.dart';
 import 'package:flutter_fest_surf/ui/widgets/schedule_row/schedule_row_widget.dart';
 
 class ScheduleRowLectureWidget extends StatelessWidget {
@@ -11,10 +13,8 @@ class ScheduleRowLectureWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 275,
-      height: 112,
-      padding: const EdgeInsets.only(top: 4, left: 16, right: 8, bottom: 16),
-      margin: const EdgeInsets.only(top: 20, left: 20, right: 20),
+      padding: const EdgeInsets.only(top: 4, left: 16, right: 12, bottom: 16),
+      // margin: const EdgeInsets.only(top: 16, left: 16, right: 16),
       decoration: BoxDecoration(
           color: configuration._style.widgetBackground,
           // gradient: RadialGradient(
@@ -71,13 +71,8 @@ class _SpeakerWidget extends StatelessWidget {
             overflow: TextOverflow.fade,
             maxLines: 1,
             softWrap: false,
-            style: TextStyle(
-              color: configuration._style.speakerNameColor,
-              fontSize: 14,
-              fontFamily: AppFonts.basisGrotesqueProRegular,
-              fontWeight: FontWeight.w500,
-              height: 1.43,
-            ),
+            style: AppTextStyle.bookText
+                .copyWith(color: configuration._style.speakerNameColor),
           ),
         )
       ],
@@ -111,19 +106,10 @@ class _DescriptionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Text(
-        configuration.lectureTitle,
-        overflow: TextOverflow.ellipsis,
-        maxLines: 2,
-        style: TextStyle(
-          color: configuration._style.lectureTitleColor,
-          fontSize: 18,
-          fontFamily: AppFonts.steinbeckRegular,
-          fontWeight: FontWeight.w400,
-          height: 1.22,
-        ),
-      ),
+    return Text(
+      configuration.lectureTitle,
+      style: AppTextStyle.steinbeckNormalText
+          .copyWith(color: configuration._style.lectureTitleColor),
     );
   }
 }
@@ -161,15 +147,15 @@ class ScheduleRowLectureWidgetConfiguration {
   final String lectureTitle;
   final bool isFavourite;
   // статус прогресса
-  final ScheduleRowLectureWidgetConfigurationProgressStatus status;
+  final ScheduleRowWidgetConfigurationProgressStatus status;
 
   // геттер, стиль виджета зависит от статуса
   _ScheduleRowLectureWidgetConfigurationStyle get _style {
     switch (status) {
-      case ScheduleRowLectureWidgetConfigurationProgressStatus.past:
+      case ScheduleRowWidgetConfigurationProgressStatus.past:
         return pastStyle;
-      case ScheduleRowLectureWidgetConfigurationProgressStatus.current:
-      case ScheduleRowLectureWidgetConfigurationProgressStatus.coming:
+      case ScheduleRowWidgetConfigurationProgressStatus.current:
+      case ScheduleRowWidgetConfigurationProgressStatus.coming:
         return comingStyle;
     }
   }
@@ -189,20 +175,20 @@ class ScheduleRowLectureWidgetConfiguration {
   // описываем стили через статические константы
   static const pastStyle = _ScheduleRowLectureWidgetConfigurationStyle(
     widgetBackground: Colors.transparent,
-    speakerNameColor: Color(0x7A52525E),
-    lectureTitleColor: Color(0xFF52525E),
+    speakerNameColor: AppColors.darkText48,
+    lectureTitleColor: AppColors.darkText,
   );
 
   static const comingStyle = _ScheduleRowLectureWidgetConfigurationStyle(
-    widgetBackground: Color(0xFF101115),
-    speakerNameColor: Color(0xFF52525E),
+    widgetBackground: AppColors.darkSecondary,
+    speakerNameColor: AppColors.darkText,
     lectureTitleColor: Colors.white,
   );
 
   static const isFavouriteStyle =
       _ScheduleRowLectureWidgetConfigurationFavouriteStyle(
-    favouriteButtonColor: Color(0xFF00BD13),
-    backgroundGradientColor: Color(0xFF00BD13),
+    favouriteButtonColor: AppColors.green,
+    backgroundGradientColor: AppColors.green,
     favouriteButtonIcon: AppImages.bookmarkFull,
   );
 
