@@ -67,19 +67,39 @@ flutter:
   fonts:
     - family: BasisGrotesquePro
       fonts:
-        - asset: assets/fonts/BasisGrotesquePro-Regular.ttf
+        - asset: assets/fonts/basis_grotesque_pro/regular.ttf
+        - asset: assets/fonts/basis_grotesque_pro/medium.ttf
           weight: 500
-    
+        - asset: assets/fonts/basis_grotesque_pro/bold.otf
+          weight: 700
+        - asset: assets/fonts/basis_grotesque_pro/regular_italic.otf
+          style: italic
+        - asset: assets/fonts/basis_grotesque_pro/bold_italic.otf
+          weight: 700
+          style: italic
+        - asset: assets/fonts/basis_grotesque_pro/black.ttf
+          weight: 900
+        - asset: assets/fonts/basis_grotesque_pro/black_italic.otf
+          weight: 900
+          style: italic
+        - asset: assets/fonts/basis_grotesque_pro/light.otf
+          weight: 300
+        - asset: assets/fonts/basis_grotesque_pro/light_italic.otf
+          weight: 900
+          style: italic
     - family: Steinbeck
       fonts:
-        - asset: assets/fonts/Steinbeck-Regular.otf
+        - asset: assets/fonts/steinbeck_regular.ttf
           weight: 400
+    - family: ComforterBrush
+      fonts:
+        - asset: assets/fonts/comforter_brush/regular.ttf
     
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
-  #
+  
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
