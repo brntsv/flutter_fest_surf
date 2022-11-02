@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
 import 'package:flutter_fest_surf/resources/resources.dart';
@@ -6,9 +5,32 @@ import 'package:flutter_fest_surf/ui/themes/app_text_style.dart';
 import 'package:flutter_fest_surf/ui/themes/app_theme.dart';
 import 'package:flutter_fest_surf/ui/widgets/schedule_row/schedule_row_break_widget.dart';
 import 'package:flutter_fest_surf/ui/widgets/schedule_row/schedule_row_widget.dart';
+import 'package:flutter_fest_surf/ui/widgets/top_notifications/notification_overlay_widget.dart';
+import 'package:flutter_fest_surf/ui/widgets/top_notifications/top_notification_manager.dart';
 
-class ScheduleWidget extends StatelessWidget {
+class ScheduleWidget extends StatefulWidget {
   const ScheduleWidget({Key? key}) : super(key: key);
+
+  @override
+  State<ScheduleWidget> createState() => _ScheduleWidgetState();
+}
+
+class _ScheduleWidgetState extends State<ScheduleWidget> {
+  OverlayEntry? _lectionOverlay;
+
+  void showOverlay(BuildContext context) {
+    final overlay = _lectionOverlay;
+    if (overlay != null) {
+      overlay.remove();
+      _lectionOverlay = null;
+      return;
+    }
+    const textWidget = TopOverlayWidget(text: 'Лекция добавлена в программу');
+
+    final entry = NotificationOverlayWidget.makeOverlayEntry(textWidget);
+    _lectionOverlay = entry;
+    Overlay.of(context)?.insert(entry);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +46,14 @@ class ScheduleWidget extends StatelessWidget {
             pinned: true,
             delegate: _SliverAppBarDelegate(topInset: topInset),
           ),
+          // /////////  TEST   ////////////
+          SliverToBoxAdapter(
+              child: ElevatedButton(
+                  onPressed: () {
+                    return showOverlay(context);
+                  },
+                  child: const Text('data'))),
+          // /////////  TEST   ////////////
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (context, index) {
