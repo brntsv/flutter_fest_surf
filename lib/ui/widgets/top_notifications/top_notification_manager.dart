@@ -1,35 +1,46 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_fest_surf/ui/themes/app_text_style.dart';
+import 'package:flutter_fest_surf/ui/widgets/top_notifications/notification_overlay_widget.dart';
+import 'package:provider/provider.dart';
 
-class TopOverlayWidget extends StatelessWidget {
-  final String text;
-  const TopOverlayWidget({Key? key, required this.text}) : super(key: key);
+abstract class TopNotificationManager {
+  void show(String text);
+}
+
+class TopNotificationManagerWidget extends StatefulWidget {
+  final Widget? child;
+  const TopNotificationManagerWidget({Key? key, this.child}) : super(key: key);
+
+  @override
+  State<TopNotificationManagerWidget> createState() =>
+      _TopNotificationManagerWidgetState();
+}
+
+class _TopNotificationManagerWidgetState
+    extends State<TopNotificationManagerWidget>
+    implements TopNotificationManager {
+  final _notificationOverlayWidgetKey =
+      GlobalKey<NotificationOverlayWidgetState>();
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.all(12),
-      child: Center(
-        child: Text(
-          'Лекция добавлена в программу',
-          style: AppTextStyle.snackText,
-        ),
-      ),
+    var childrenStack = <Widget>[];
+    final child = widget.child;
+    if (child != null) {
+      childrenStack.add(child);
+    }
+
+    final notificationOverlayWidget =
+        NotificationOverlayWidget(key: _notificationOverlayWidgetKey);
+
+    childrenStack.add(notificationOverlayWidget);
+    return Provider<TopNotificationManager>.value(
+      value: this,
+      child: Stack(children: childrenStack),
     );
   }
-}
-
-class TopNotificationManager extends StatefulWidget {
-  final Widget? child;
-  const TopNotificationManager({Key? key, this.child}) : super(key: key);
 
   @override
-  State<TopNotificationManager> createState() => _TopNotificationManagerState();
-}
-
-class _TopNotificationManagerState extends State<TopNotificationManager> {
-  @override
-  Widget build(BuildContext context) {
-    return widget.child ?? Container();
+  void show(String text) {
+    _notificationOverlayWidgetKey.currentState?.show(text);
   }
 }

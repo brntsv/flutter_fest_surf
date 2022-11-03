@@ -5,31 +5,14 @@ import 'package:flutter_fest_surf/ui/themes/app_text_style.dart';
 import 'package:flutter_fest_surf/ui/themes/app_theme.dart';
 import 'package:flutter_fest_surf/ui/widgets/schedule_row/schedule_row_break_widget.dart';
 import 'package:flutter_fest_surf/ui/widgets/schedule_row/schedule_row_widget.dart';
-import 'package:flutter_fest_surf/ui/widgets/top_notifications/notification_overlay_widget.dart';
 import 'package:flutter_fest_surf/ui/widgets/top_notifications/top_notification_manager.dart';
+import 'package:provider/provider.dart';
 
-class ScheduleWidget extends StatefulWidget {
+class ScheduleWidget extends StatelessWidget {
   const ScheduleWidget({Key? key}) : super(key: key);
 
-  @override
-  State<ScheduleWidget> createState() => _ScheduleWidgetState();
-}
-
-class _ScheduleWidgetState extends State<ScheduleWidget> {
-  OverlayEntry? _lectionOverlay;
-
   void showOverlay(BuildContext context) {
-    final overlay = _lectionOverlay;
-    if (overlay != null) {
-      overlay.remove();
-      _lectionOverlay = null;
-      return;
-    }
-    const textWidget = TopOverlayWidget(text: 'Лекция добавлена в программу');
-
-    final entry = NotificationOverlayWidget.makeOverlayEntry(textWidget);
-    _lectionOverlay = entry;
-    Overlay.of(context)?.insert(entry);
+    context.read<TopNotificationManager>().show('Drug 2.0');
   }
 
   @override
