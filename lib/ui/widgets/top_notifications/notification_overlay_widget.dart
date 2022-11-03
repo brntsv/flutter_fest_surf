@@ -20,16 +20,44 @@ class NotificationOverlayWidgetState extends State<NotificationOverlayWidget> {
   var _offset = _hidedOffset; // значение по дефолту
   var _text = '';
 
+  List<String> _textsQueue = <String>[];
+
+  bool get isShowed => _offset == _showedOffset;
+
   void show(String text) {
+    if (isShowed) {
+      _timer?.cancel();
+      _timer = null;
+      _textsQueue.add(text);
+      _hideWidget();
+    } else {
+      _showWidget(text);
+    }
+  }
+
+  void _showWidget(String text) {
     setState(() {
       _text = text;
       _offset = _showedOffset; // смена оффсета, анимация срабатывает
     });
-    _timer = Timer(const Duration(seconds: 2), () {
-      setState(() {
-        _offset = _hidedOffset; // по таймеру меняем оффсет в исходное положение
-      });
+    _timer = Timer(const Duration(seconds: 4), () {
+      _timer = null; // по таймеру меняем оффсет в исходное положение
+      _hideWidget();
     });
+  }
+
+  void _hideWidget() {
+    setState(() {
+      _offset = _hidedOffset;
+    });
+  }
+
+  void onAnimationEnd() {
+    if (isShowed || _textsQueue.isEmpty) {
+      return;
+    }
+    final text = _textsQueue.removeAt(0);
+    _showWidget(text);
   }
 
   @override
@@ -42,6 +70,7 @@ class NotificationOverlayWidgetState extends State<NotificationOverlayWidget> {
       child: AnimatedSlide(
         offset: _offset,
         duration: const Duration(milliseconds: 200),
+        onEnd: onAnimationEnd,
         child: Material(
           child: Container(
             padding: EdgeInsets.only(top: topPadding),
