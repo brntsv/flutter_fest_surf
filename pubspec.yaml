@@ -93,7 +93,7 @@ flutter:
           weight: 400
     - family: ComforterBrush
       fonts:
-        - asset: assets/fonts/comforter_brush/regular.ttf
+        - asset: assets/fonts/comforter_brush_regular.ttf
     
   #   - family: Trajan Pro
   #     fonts:
