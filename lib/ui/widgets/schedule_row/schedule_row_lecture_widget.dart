@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_fest_surf/resources/app_fonts.dart';
 import 'package:flutter_fest_surf/resources/resources.dart';
+import 'package:flutter_fest_surf/ui/navigation/main_navigation.dart';
 import 'package:flutter_fest_surf/ui/themes/app_text_style.dart';
 import 'package:flutter_fest_surf/ui/themes/app_theme.dart';
 import 'package:flutter_fest_surf/ui/widgets/schedule_row/schedule_row_widget.dart';
@@ -12,38 +12,52 @@ class ScheduleRowLectureWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.only(top: 4, left: 16, right: 12, bottom: 16),
-      // margin: const EdgeInsets.only(top: 16, left: 16, right: 16),
-      decoration: BoxDecoration(
-          color: configuration._style.widgetBackground,
-          // gradient: RadialGradient(
-          //   colors: [
-          //     const Color(0xFF00BD13),
-          //     configuration._style.widgetBackground,
-          //   ],
-          //   center: Alignment.topRight,
-          // ),
-          borderRadius: const BorderRadius.all(
-            Radius.circular(20),
-          )),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Expanded(
-                  child: _SpeakerWidget(
-                configuration: configuration,
+    return Stack(
+      children: [
+        Container(
+          padding:
+              const EdgeInsets.only(top: 4, left: 16, right: 12, bottom: 16),
+          // margin: const EdgeInsets.only(top: 16, left: 16, right: 16),
+          decoration: BoxDecoration(
+              color: configuration._style.widgetBackground,
+              // gradient: RadialGradient(
+              //   colors: [
+              //     const Color(0xFF00BD13),
+              //     configuration._style.widgetBackground,
+              //   ],
+              //   center: Alignment.topRight,
+              // ),
+              borderRadius: const BorderRadius.all(
+                Radius.circular(20),
               )),
-              _FavouriteWidget(
-                configuration: configuration,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Expanded(
+                      child: _SpeakerWidget(
+                    configuration: configuration,
+                  )),
+                  _FavouriteWidget(
+                    configuration: configuration,
+                  ),
+                ],
               ),
+              _DescriptionWidget(configuration: configuration),
             ],
           ),
-          _DescriptionWidget(configuration: configuration),
-        ],
-      ),
+        ),
+        Card(
+          color: Colors.transparent,
+          child: InkWell(
+            borderRadius: BorderRadius.circular(10),
+            onTap: () {
+              Navigator.of(context).pushNamed(Screens.lectureDetails);
+            },
+          ),
+        ),
+      ],
     );
   }
 }

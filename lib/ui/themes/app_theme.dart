@@ -26,6 +26,8 @@ abstract class AppColors {
   static const white = Color(0xFFFFFFFF);
   static const white72 = Color(0xB7FFFFFF);
   static const white88 = Color(0xE0FFFFFF);
+  static const gradientGreenBlue = [AppColors.green, AppColors.blue];
+  static const gradientOff = [AppColors.darkSecondary, AppColors.darkSecondary];
 }
 // расчет цвета с прозрачностью 88 процентов. 255 х 0.88 = 224.4
 // dec to hex online - получаем EO и вставляем вместо FF

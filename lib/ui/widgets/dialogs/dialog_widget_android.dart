@@ -35,3 +35,6 @@ class DialogWidgetAndroid extends StatelessWidget {
     );
   }
 }
+
+// Этот виджет нигде не применяется, он написан для взаимозаменяемости
+// В проектe используется CupertinoWidget
