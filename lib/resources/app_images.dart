@@ -10,4 +10,7 @@ class AppImages {
   static const String bookmarkFull = 'assets/images/bookmark_full.png';
   static const String tabbarCalendar = 'assets/images/tabbar_calendar.png';
   static const String tabbarPoint = 'assets/images/point.png';
+  static const String detailsGradientBackground =
+      'assets/images/details_gradient_background.png';
+  static const String speakerPhoto = 'assets/images/speaker_photo.png';
 }
