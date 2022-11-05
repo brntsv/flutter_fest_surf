@@ -25,7 +25,7 @@ abstract class AppColors {
   static const darkText72 = Color(0xB752525E);
   static const white = Color(0xFFFFFFFF);
   static const white72 = Color(0xB7FFFFFF);
-  static const white88 = Color(0xE0FFFFFF);
+  static const white88 = Color(0x8c4FFFFFF);
   static const gradientGreenBlue = [AppColors.green, AppColors.blue];
   static const gradientOff = [AppColors.darkSecondary, AppColors.darkSecondary];
 }
