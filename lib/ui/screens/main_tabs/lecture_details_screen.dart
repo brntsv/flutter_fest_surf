@@ -5,8 +5,21 @@ import 'package:flutter_fest_surf/resources/resources.dart';
 import 'package:flutter_fest_surf/ui/themes/app_text_style.dart';
 import 'package:flutter_fest_surf/ui/themes/app_theme.dart';
 
-class LectureDetailsScreen extends StatelessWidget {
+class LectureDetailsScreen extends StatefulWidget {
   const LectureDetailsScreen({Key? key}) : super(key: key);
+
+  @override
+  State<LectureDetailsScreen> createState() => _LectureDetailsScreenState();
+}
+
+class _LectureDetailsScreenState extends State<LectureDetailsScreen> {
+  final _scrollController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,20 +31,39 @@ class LectureDetailsScreen extends StatelessWidget {
       ),
       body: ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 600),
-        child: ListView(
-          padding: EdgeInsets.zero,
-          physics: const BouncingScrollPhysics(),
-          children: const [
-            _HeaderWidget(),
-            _TitleWidget(),
-            _DecriptionWidget(),
-            _ScheduleInfoWidget(),
+        child: Stack(
+          children: [
+            Positioned(
+              left: 0,
+              right: 0,
+              bottom: 0,
+              child: Image.asset(AppImages.easterBirdLarge),
+            ),
+            ListView(
+              padding: EdgeInsets.zero,
+              physics: const BouncingScrollPhysics(
+                parent: AlwaysScrollableScrollPhysics(),
+              ),
+              controller: _scrollController,
+              children: const [
+                _HeaderWidget(),
+                _TitleWidget(),
+                _DecriptionWidget(),
+                _ScheduleInfoWidget(),
+              ],
+            ),
           ],
         ),
       ),
       floatingActionButton: const _AddToFavouriteButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
   }
 }
 
