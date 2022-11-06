@@ -13,4 +13,5 @@ class AppImages {
   static const String detailsGradientBackground =
       'assets/images/details_gradient_background.png';
   static const String speakerPhoto = 'assets/images/speaker_photo.png';
+  static const String easterBirdLarge = 'assets/images/easter_bird_large.png';
 }
