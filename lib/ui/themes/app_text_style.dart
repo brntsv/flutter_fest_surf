@@ -6,7 +6,7 @@ abstract class AppTextStyle {
     fontSize: 16,
     fontWeight: FontWeight.bold,
     fontStyle: FontStyle.normal,
-    fontFamily: AppFonts.basisGrotesquePro,
+    fontFamily: AppFonts.basisGrotesqueProRegular,
     height: 1.25,
     letterSpacing: 0.4,
   );
@@ -15,7 +15,7 @@ abstract class AppTextStyle {
     fontSize: 14,
     fontWeight: FontWeight.w500,
     fontStyle: FontStyle.normal,
-    fontFamily: AppFonts.basisGrotesquePro,
+    fontFamily: AppFonts.basisGrotesqueProRegular,
     height: 1.4285714286,
     letterSpacing: 0.0,
   );
@@ -24,7 +24,7 @@ abstract class AppTextStyle {
     fontSize: 12,
     fontWeight: FontWeight.w500,
     fontStyle: FontStyle.normal,
-    fontFamily: AppFonts.basisGrotesquePro,
+    fontFamily: AppFonts.basisGrotesqueProRegular,
     height: 1.33,
     letterSpacing: 0.4,
   );
@@ -33,7 +33,7 @@ abstract class AppTextStyle {
     fontSize: 12,
     fontWeight: FontWeight.normal,
     fontStyle: FontStyle.normal,
-    fontFamily: AppFonts.basisGrotesquePro,
+    fontFamily: AppFonts.basisGrotesqueProRegular,
     height: 1.33,
     letterSpacing: 0.4,
   );
@@ -42,7 +42,7 @@ abstract class AppTextStyle {
     fontSize: 16,
     fontWeight: FontWeight.bold,
     fontStyle: FontStyle.normal,
-    fontFamily: AppFonts.basisGrotesquePro,
+    fontFamily: AppFonts.basisGrotesqueProRegular,
     height: 1.375,
     letterSpacing: 0.0,
   );
@@ -51,7 +51,7 @@ abstract class AppTextStyle {
     fontSize: 36,
     fontWeight: FontWeight.bold,
     fontStyle: FontStyle.normal,
-    fontFamily: AppFonts.steinbeck,
+    fontFamily: AppFonts.steinbeckRegular,
     height: 1.3,
     letterSpacing: 0.0,
   );
@@ -60,7 +60,7 @@ abstract class AppTextStyle {
     fontSize: 12,
     fontWeight: FontWeight.normal,
     fontStyle: FontStyle.normal,
-    fontFamily: AppFonts.basisGrotesquePro,
+    fontFamily: AppFonts.basisGrotesqueProRegular,
     height: 1.6666666667,
     letterSpacing: 2.6,
   );
@@ -69,7 +69,7 @@ abstract class AppTextStyle {
     fontSize: 24,
     fontWeight: FontWeight.bold,
     fontStyle: FontStyle.normal,
-    fontFamily: AppFonts.basisGrotesquePro,
+    fontFamily: AppFonts.basisGrotesqueProRegular,
     height: 1.1666666667,
     letterSpacing: 0.0,
   );
@@ -78,7 +78,7 @@ abstract class AppTextStyle {
     fontSize: 14,
     fontWeight: FontWeight.w500,
     fontStyle: FontStyle.italic,
-    fontFamily: AppFonts.basisGrotesquePro,
+    fontFamily: AppFonts.basisGrotesqueProItalic,
     height: 20 / 14,
     letterSpacing: 0.0,
   );
@@ -87,7 +87,7 @@ abstract class AppTextStyle {
     fontSize: 18,
     fontWeight: FontWeight.normal,
     fontStyle: FontStyle.normal,
-    fontFamily: AppFonts.steinbeck,
+    fontFamily: AppFonts.steinbeckRegular,
     height: 22 / 18,
     letterSpacing: 0.0,
   );
@@ -96,26 +96,26 @@ abstract class AppTextStyle {
     fontSize: 24,
     fontWeight: FontWeight.normal,
     fontStyle: FontStyle.normal,
-    fontFamily: AppFonts.steinbeck,
+    fontFamily: AppFonts.steinbeckRegular,
     height: 28 / 24,
     letterSpacing: 0.0,
   );
 
   static const steinbeckHeadItalic = TextStyle(
     fontSize: 36,
-    fontWeight: FontWeight.normal,
+    fontWeight: FontWeight.w400,
     fontStyle: FontStyle.italic,
-    fontFamily: AppFonts.steinbeck,
-    height: 40 / 36,
+    fontFamily: AppFonts.steinbeckItalic,
+    height: 44 / 36,
     letterSpacing: 0.0,
   );
 
   static const steinbeckHeadNormal = TextStyle(
     fontSize: 36,
-    fontWeight: FontWeight.normal,
+    fontWeight: FontWeight.w400,
     fontStyle: FontStyle.normal,
-    fontFamily: AppFonts.steinbeck,
-    height: 40 / 36,
+    fontFamily: AppFonts.steinbeckRegular,
+    height: 44 / 36,
     letterSpacing: 0.0,
   );
 
@@ -123,7 +123,7 @@ abstract class AppTextStyle {
     fontSize: 17,
     fontWeight: FontWeight.w500,
     fontStyle: FontStyle.normal,
-    fontFamily: AppFonts.basisGrotesquePro,
+    fontFamily: AppFonts.basisGrotesqueProRegular,
     height: 22 / 17,
     letterSpacing: 0.0,
   );
@@ -132,7 +132,7 @@ abstract class AppTextStyle {
     fontSize: 17,
     fontWeight: FontWeight.w400,
     fontStyle: FontStyle.normal,
-    fontFamily: AppFonts.basisGrotesquePro,
+    fontFamily: AppFonts.basisGrotesqueProRegular,
     height: 22 / 17,
     letterSpacing: 0.0,
   );
@@ -141,7 +141,7 @@ abstract class AppTextStyle {
     fontSize: 17,
     fontWeight: FontWeight.w500,
     fontStyle: FontStyle.normal,
-    fontFamily: AppFonts.basisGrotesquePro,
+    fontFamily: AppFonts.basisGrotesqueProRegular,
     height: 22 / 17,
     letterSpacing: 0.0,
   );
