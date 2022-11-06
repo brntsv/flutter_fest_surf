@@ -65,7 +65,7 @@ class ScheduleWidget extends StatelessWidget {
               },
               childCount: 10,
             ),
-          )
+          ),
         ],
       ),
     );
