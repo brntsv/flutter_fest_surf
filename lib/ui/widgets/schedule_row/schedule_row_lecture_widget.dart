@@ -1,4 +1,6 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+
 import 'package:flutter_fest_surf/resources/resources.dart';
 import 'package:flutter_fest_surf/ui/navigation/main_navigation.dart';
 import 'package:flutter_fest_surf/ui/themes/app_text_style.dart';
@@ -7,8 +9,12 @@ import 'package:flutter_fest_surf/ui/widgets/schedule_row/schedule_row_widget.da
 
 class ScheduleRowLectureWidget extends StatelessWidget {
   final ScheduleRowLectureWidgetConfiguration configuration;
-  const ScheduleRowLectureWidget({Key? key, required this.configuration})
-      : super(key: key);
+  // final List<ScheduleRowLectureWidgetConfiguration> configurationList;
+  const ScheduleRowLectureWidget({
+    Key? key,
+    required this.configuration,
+    // required this.configurationList,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +80,6 @@ class _SpeakerWidget extends StatelessWidget {
         CircleAvatar(
           backgroundImage: NetworkImage(
             configuration.avatarUrl,
-            // 'https://hiphop4real.com/wp-content/uploads/2017/06/YUriy-Dud.jpg',
           ),
           radius: 12,
         ),
@@ -159,6 +164,7 @@ class ScheduleRowLectureWidgetConfiguration {
   final String avatarUrl;
   final String speakerName;
   final String lectureTitle;
+  final String jobTitle;
   final bool isFavourite;
   // статус прогресса
   final ScheduleRowWidgetConfigurationProgressStatus status;
@@ -182,6 +188,7 @@ class ScheduleRowLectureWidgetConfiguration {
     required this.avatarUrl,
     required this.speakerName,
     required this.lectureTitle,
+    required this.jobTitle,
     required this.isFavourite,
     required this.status,
   });

@@ -7,6 +7,7 @@ import 'package:flutter_fest_surf/ui/themes/app_text_style.dart';
 import 'package:flutter_fest_surf/ui/themes/app_theme.dart';
 import 'package:flutter_fest_surf/ui/widgets/dialogs/dialog_widget_ios.dart';
 import 'package:flutter_fest_surf/ui/widgets/schedule_row/schedule_row_break_widget.dart';
+import 'package:flutter_fest_surf/ui/widgets/schedule_row/schedule_row_lecture_widget.dart';
 import 'package:flutter_fest_surf/ui/widgets/schedule_row/schedule_row_widget.dart';
 import 'package:flutter_fest_surf/ui/widgets/top_notifications/top_notification_manager.dart';
 import 'package:provider/provider.dart';
@@ -29,6 +30,7 @@ class ScheduleWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final topInset = MediaQuery.of(context).padding.top;
+    final List<ScheduleRowLectureWidgetConfiguration> _listOfLectures = [];
 
     return SafeArea(
       top: false,
@@ -60,7 +62,7 @@ class ScheduleWidget extends StatelessWidget {
                 }
                 return Padding(
                   padding: const EdgeInsets.only(top: 16, left: 20, right: 20),
-                  child: ScheduleRowWidget.single(),
+                  child: ScheduleRowWidget.multi(),
                 );
               },
               childCount: 10,
