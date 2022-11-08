@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_fest_surf/resources/resources.dart';
 import 'package:flutter_fest_surf/ui/screens/favourite_screen/favourite_screen.dart';
 import 'package:flutter_fest_surf/ui/screens/main/viewmodel/main_view_model.dart';
+import 'package:flutter_fest_surf/ui/screens/map_screen/map_screen.dart';
 import 'package:flutter_fest_surf/ui/screens/timetable/timetable_widget.dart';
 import 'package:provider/provider.dart';
 
@@ -30,12 +31,7 @@ class _BodyWidget extends StatelessWidget {
       children: const [
         ScheduleWidget(),
         FavourireScreenWidget(),
-        Center(
-          child: Text(
-            '3',
-            style: TextStyle(color: Colors.white),
-          ),
-        ),
+        MapScreen(),
       ],
     );
   }
