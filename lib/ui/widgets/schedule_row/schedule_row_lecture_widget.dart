@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
 import 'package:flutter_fest_surf/resources/resources.dart';
@@ -9,12 +8,8 @@ import 'package:flutter_fest_surf/ui/widgets/schedule_row/schedule_row_widget.da
 
 class ScheduleRowLectureWidget extends StatelessWidget {
   final ScheduleRowLectureWidgetConfiguration configuration;
-  // final List<ScheduleRowLectureWidgetConfiguration> configurationList;
-  const ScheduleRowLectureWidget({
-    Key? key,
-    required this.configuration,
-    // required this.configurationList,
-  }) : super(key: key);
+  const ScheduleRowLectureWidget({Key? key, required this.configuration})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

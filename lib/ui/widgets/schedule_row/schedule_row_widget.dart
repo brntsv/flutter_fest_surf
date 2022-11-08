@@ -1,6 +1,5 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_fest_surf/ui/widgets/schedule_row/schedule_row_break_widget.dart';
 import 'package:flutter_fest_surf/ui/widgets/schedule_row/schedule_row_lecture_widget.dart';
 import 'package:flutter_fest_surf/ui/widgets/schedule_row/schedule_row_time_widget.dart';
 
@@ -119,11 +118,10 @@ class _ScheduleMultiLectureWidget extends ScheduleRowWidget {
         status: ScheduleRowWidgetConfigurationProgressStatus.coming,
       ),
     ];
-
     List<ScheduleRowTimeWidgetConfiguration> listOfTime = [
       const ScheduleRowTimeWidgetConfiguration(
-        startTime: '8:00',
-        endTime: '9:30',
+        startTime: '  8:00',
+        endTime: '  9:30',
         status: ScheduleRowWidgetConfigurationProgressStatus.coming,
       ),
       const ScheduleRowTimeWidgetConfiguration(
@@ -158,16 +156,119 @@ class _ScheduleMultiLectureWidget extends ScheduleRowWidget {
       ),
     ];
 
-    return IntrinsicHeight(
-      child: Row(
-        children: [
-          ScheduleRowTimeWidget(configuration: listOfTime[index]),
-          Expanded(
-            child:
-                ScheduleRowLectureWidget(configuration: listOfLectures[index]),
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(top: 16, left: 20, right: 20),
+          child: IntrinsicHeight(
+            child: Row(
+              children: [
+                ScheduleRowTimeWidget(configuration: listOfTime[0]),
+                Expanded(
+                  child: ScheduleRowLectureWidget(
+                      configuration: listOfLectures[0]),
+                ),
+              ],
+            ),
           ),
-        ],
-      ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 16, left: 20, right: 20),
+          child: IntrinsicHeight(
+            child: Row(
+              children: [
+                ScheduleRowTimeWidget(configuration: listOfTime[1]),
+                Expanded(
+                  child: ScheduleRowLectureWidget(
+                      configuration: listOfLectures[1]),
+                ),
+              ],
+            ),
+          ),
+        ),
+        const Padding(
+          padding: EdgeInsets.only(left: 14, right: 14, top: 16),
+          child: SizedBox(height: 70, child: ScheduleRowBreakWidget()),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 16, left: 20, right: 20),
+          child: IntrinsicHeight(
+            child: Row(
+              children: [
+                ScheduleRowTimeWidget(configuration: listOfTime[2]),
+                Expanded(
+                  child: ScheduleRowLectureWidget(
+                      configuration: listOfLectures[2]),
+                ),
+              ],
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 16, left: 20, right: 20),
+          child: IntrinsicHeight(
+            child: Row(
+              children: [
+                ScheduleRowTimeWidget(configuration: listOfTime[3]),
+                Expanded(
+                  child: ScheduleRowLectureWidget(
+                      configuration: listOfLectures[3]),
+                ),
+              ],
+            ),
+          ),
+        ),
+        const Padding(
+          padding: EdgeInsets.only(left: 14, right: 14, top: 16),
+          child: SizedBox(height: 70, child: ScheduleRowBreakWidget()),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 16, left: 20, right: 20),
+          child: IntrinsicHeight(
+            child: Row(
+              children: [
+                ScheduleRowTimeWidget(configuration: listOfTime[4]),
+                Expanded(
+                  child: ScheduleRowLectureWidget(
+                      configuration: listOfLectures[4]),
+                ),
+              ],
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 16, left: 20, right: 20),
+          child: IntrinsicHeight(
+            child: Row(
+              children: [
+                ScheduleRowTimeWidget(configuration: listOfTime[5]),
+                Expanded(
+                  child: ScheduleRowLectureWidget(
+                      configuration: listOfLectures[5]),
+                ),
+              ],
+            ),
+          ),
+        ),
+        const Padding(
+          padding: EdgeInsets.only(left: 14, right: 14, top: 16),
+          child: SizedBox(height: 70, child: ScheduleRowBreakWidget()),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 16, left: 20, right: 20),
+          child: IntrinsicHeight(
+            child: Row(
+              children: [
+                ScheduleRowTimeWidget(configuration: listOfTime[6]),
+                Expanded(
+                  child: ScheduleRowLectureWidget(
+                      configuration: listOfLectures[6]),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

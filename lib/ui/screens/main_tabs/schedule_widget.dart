@@ -51,21 +51,26 @@ class ScheduleWidget extends StatelessWidget {
                   child: const Text('data'))),
           // /////////  TEST   ////////////
           SliverList(
-            delegate: SliverChildBuilderDelegate(
+            delegate:
+                // SliverChildListDelegate([
+                //   Padding(
+                //     padding: const EdgeInsets.only(top: 16, left: 20, right: 20),
+                //     child: ScheduleRowWidget.multi(key: key),
+                //   ),
+                // ]),
+
+                SliverChildBuilderDelegate(
               (context, index) {
-                if ((index + 1) % 3 == 0) {
-                  return const Padding(
-                    padding: EdgeInsets.only(left: 14, right: 14, top: 16),
-                    child:
-                        SizedBox(height: 70, child: ScheduleRowBreakWidget()),
-                  );
-                }
-                return Padding(
-                  padding: const EdgeInsets.only(top: 16, left: 20, right: 20),
-                  child: ScheduleRowWidget.multi(),
-                );
+                // if ((index + 1) % 3 == 0) {
+                //   return const Padding(
+                //     padding: EdgeInsets.only(left: 14, right: 14, top: 16),
+                //     child:
+                //         SizedBox(height: 70, child: ScheduleRowBreakWidget()),
+                //   );
+                // }
+                return ScheduleRowWidget.multi();
               },
-              childCount: 10,
+              childCount: 1,
             ),
           ),
         ],
@@ -157,7 +162,7 @@ class _SectionChipsWidget extends StatelessWidget {
         itemCount: totalItem,
         itemBuilder: (context, index) {
           final currentGradientStartPoint =
-              index * itemGradientWidth + halfItemGradientWidth;
+              index++ * itemGradientWidth + halfItemGradientWidth;
           final currentGradientEndPoint =
               endGradientPoint - currentGradientStartPoint;
 
