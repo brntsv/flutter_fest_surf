@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 class ScreenFactory {
   Widget makeMainTabs() => ChangeNotifierProvider(
         create: ((_) => MainTabsViewModel()),
-        child: const MainTabsScreen(),
+        child: const MainScreen(),
       );
 
   Widget makeLectureDetails() => const LectureDetailsScreen();

@@ -6,8 +6,8 @@ import 'package:flutter_fest_surf/ui/screens/main/viewmodel/main_view_model.dart
 import 'package:flutter_fest_surf/ui/screens/timetable/timetable_widget.dart';
 import 'package:provider/provider.dart';
 
-class MainTabsScreen extends StatelessWidget {
-  const MainTabsScreen({Key? key}) : super(key: key);
+class MainScreen extends StatelessWidget {
+  const MainScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
