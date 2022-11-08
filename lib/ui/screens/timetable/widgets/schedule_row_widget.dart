@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_fest_surf/ui/widgets/schedule_row/schedule_row_break_widget.dart';
-import 'package:flutter_fest_surf/ui/widgets/schedule_row/schedule_row_lecture_widget.dart';
-import 'package:flutter_fest_surf/ui/widgets/schedule_row/schedule_row_time_widget.dart';
+import 'package:flutter_fest_surf/ui/screens/timetable/widgets/schedule_row_break_widget.dart';
+import 'package:flutter_fest_surf/ui/screens/timetable/widgets/schedule_row_lecture_widget.dart';
+import 'package:flutter_fest_surf/ui/screens/timetable/widgets/schedule_row_time_widget.dart';
 
 abstract class ScheduleRowWidget extends StatelessWidget {
   const ScheduleRowWidget({Key? key}) : super(key: key);

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_fest_surf/resources/resources.dart';
 import 'package:flutter_fest_surf/ui/themes/app_text_style.dart';
 import 'package:flutter_fest_surf/ui/themes/app_theme.dart';
-import 'package:flutter_fest_surf/ui/widgets/easter_egg_bird_widget.dart';
+import 'package:flutter_fest_surf/ui/widgets/easter_egg/easter_egg_bird_widget.dart';
 
 class LectureDetailsScreen extends StatefulWidget {
   const LectureDetailsScreen({Key? key}) : super(key: key);

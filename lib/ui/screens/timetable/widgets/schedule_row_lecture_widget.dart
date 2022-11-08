@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_fest_surf/resources/resources.dart';
 import 'package:flutter_fest_surf/ui/navigation/main_navigation.dart';
+import 'package:flutter_fest_surf/ui/screens/timetable/widgets/schedule_row_widget.dart';
 import 'package:flutter_fest_surf/ui/themes/app_text_style.dart';
 import 'package:flutter_fest_surf/ui/themes/app_theme.dart';
-import 'package:flutter_fest_surf/ui/widgets/schedule_row/schedule_row_widget.dart';
 
 class ScheduleRowLectureWidget extends StatelessWidget {
   final ScheduleRowLectureWidgetConfiguration configuration;

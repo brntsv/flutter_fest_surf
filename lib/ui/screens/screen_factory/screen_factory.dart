@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_fest_surf/ui/screens/main_tabs/lecture_details_screen.dart';
-import 'package:flutter_fest_surf/ui/screens/main_tabs/main_tabs_screen.dart';
-import 'package:flutter_fest_surf/ui/screens/main_tabs/main_tabs_view_model.dart';
+import 'package:flutter_fest_surf/ui/screens/lecture_details_screen/lecture_details_screen.dart';
+import 'package:flutter_fest_surf/ui/screens/main/main_screen.dart';
+import 'package:flutter_fest_surf/ui/screens/main/viewmodel/main_view_model.dart';
 import 'package:provider/provider.dart';
 
 class ScreenFactory {
