@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_fest_surf/resources/resources.dart';
+import 'package:flutter_fest_surf/ui/screens/main_tabs/lecture_details_screen.dart';
 import 'package:flutter_fest_surf/ui/themes/app_text_style.dart';
 import 'package:flutter_fest_surf/ui/themes/app_theme.dart';
 import 'package:flutter_fest_surf/ui/widgets/dialogs/dialog_widget_ios.dart';
@@ -12,11 +13,18 @@ import 'package:flutter_fest_surf/ui/widgets/schedule_row/schedule_row_widget.da
 import 'package:flutter_fest_surf/ui/widgets/top_notifications/top_notification_manager.dart';
 import 'package:provider/provider.dart';
 
-class ScheduleWidget extends StatelessWidget {
+class ScheduleWidget extends StatefulWidget {
   const ScheduleWidget({Key? key}) : super(key: key);
 
+  @override
+  State<ScheduleWidget> createState() => _ScheduleWidgetState();
+}
+
+class _ScheduleWidgetState extends State<ScheduleWidget> {
+  final _scrollController = ScrollController();
+
   void showOverlay(BuildContext context) {
-    context.read<TopNotificationManager>().show('Drug 2.0');
+    context.read<TopNotificationManager>().show('Лекция добавлена в избранное');
 
     showDialog<String>(
       context: context,
@@ -34,48 +42,65 @@ class ScheduleWidget extends StatelessWidget {
 
     return SafeArea(
       top: false,
-      child: CustomScrollView(
-        physics: const BouncingScrollPhysics(),
-        slivers: [
-          const _LogoWidget(),
-          SliverPersistentHeader(
-            pinned: true,
-            delegate: _SliverAppBarDelegate(topInset: topInset),
+      child: Stack(
+        children: [
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: -100,
+            child: EasterBirdWidget(scrollController: _scrollController),
           ),
-          // /////////  TEST   ////////////
-          SliverToBoxAdapter(
-              child: ElevatedButton(
-                  onPressed: () {
-                    return showOverlay(context);
-                  },
-                  child: const Text('data'))),
-          // /////////  TEST   ////////////
-          SliverList(
-            delegate:
-                // SliverChildListDelegate([
-                //   Padding(
-                //     padding: const EdgeInsets.only(top: 16, left: 20, right: 20),
-                //     child: ScheduleRowWidget.multi(key: key),
-                //   ),
-                // ]),
+          CustomScrollView(
+            controller: _scrollController,
+            physics: const BouncingScrollPhysics(),
+            slivers: [
+              const _LogoWidget(),
+              SliverPersistentHeader(
+                pinned: true,
+                delegate: _SliverAppBarDelegate(topInset: topInset),
+              ),
+              // /////////  TEST   ////////////
+              SliverToBoxAdapter(
+                  child: ElevatedButton(
+                      onPressed: () {
+                        return showOverlay(context);
+                      },
+                      child: const Text('data'))),
+              // /////////  TEST   ////////////
+              SliverList(
+                delegate:
+                    // SliverChildListDelegate([
+                    //   Padding(
+                    //     padding: const EdgeInsets.only(top: 16, left: 20, right: 20),
+                    //     child: ScheduleRowWidget.multi(key: key),
+                    //   ),
+                    // ]),
 
-                SliverChildBuilderDelegate(
-              (context, index) {
-                // if ((index + 1) % 3 == 0) {
-                //   return const Padding(
-                //     padding: EdgeInsets.only(left: 14, right: 14, top: 16),
-                //     child:
-                //         SizedBox(height: 70, child: ScheduleRowBreakWidget()),
-                //   );
-                // }
-                return ScheduleRowWidget.multi();
-              },
-              childCount: 1,
-            ),
+                    SliverChildBuilderDelegate(
+                  (context, index) {
+                    // if ((index + 1) % 3 == 0) {
+                    //   return const Padding(
+                    //     padding: EdgeInsets.only(left: 14, right: 14, top: 16),
+                    //     child:
+                    //         SizedBox(height: 70, child: ScheduleRowBreakWidget()),
+                    //   );
+                    // }
+                    return ScheduleRowWidget.multi();
+                  },
+                  childCount: 1,
+                ),
+              ),
+            ],
           ),
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
   }
 }
 
@@ -213,5 +238,72 @@ class _SectionChipsWidget extends StatelessWidget {
         },
       ),
     );
+  }
+}
+
+class EasterBirdWidget extends StatefulWidget {
+  final ScrollController scrollController;
+
+  const EasterBirdWidget({
+    Key? key,
+    required this.scrollController,
+  }) : super(key: key);
+
+  @override
+  State<EasterBirdWidget> createState() => _EasterBirdWidgetState();
+}
+
+class _EasterBirdWidgetState extends State<EasterBirdWidget> {
+  late ScrollController _scrollController;
+  var _easterBirdScale = 0.0;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController = widget.scrollController;
+
+    _scrollController.addListener(_onChangeScrollOffset);
+  }
+
+  @override
+  void didUpdateWidget(covariant EasterBirdWidget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (!identical(oldWidget.scrollController, widget.scrollController)) {
+      _scrollController.removeListener(_onChangeScrollOffset);
+      _scrollController = widget.scrollController;
+      _scrollController.addListener(_onChangeScrollOffset);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Transform.scale(
+      scale: _easterBirdScale,
+      child: Image.asset(AppImages.easterBirdLarge),
+    );
+  }
+
+  @override
+  void dispose() {
+    _scrollController.removeListener(_onChangeScrollOffset);
+    super.dispose();
+  }
+
+  void _onChangeScrollOffset() {
+    // _scrollController.offset;
+    // offset - это тот размер, на который контент проскроллен
+
+    // _scrollController.position.maxScrollExtent;
+    // maxScrollExtent - это максимальная величина контента, на которую он
+    // может проскроллиться
+    final offset =
+        _scrollController.offset - _scrollController.position.maxScrollExtent;
+    // узнаем на сколько залезли за предел скролла
+    setState(() {
+      if (offset >= 0) {
+        _easterBirdScale = offset / 180;
+      }
+    });
   }
 }
