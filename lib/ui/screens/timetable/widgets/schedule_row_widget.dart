@@ -124,7 +124,7 @@ class _ScheduleMultiLectureWidget extends ScheduleRowWidget {
         status: ScheduleRowWidgetConfigurationProgressStatus.coming,
       ),
       const ScheduleRowTimeWidgetConfiguration(
-        startTime: '9:35',
+        startTime: '  9:35',
         endTime: '11:00',
         status: ScheduleRowWidgetConfigurationProgressStatus.coming,
       ),
@@ -154,6 +154,7 @@ class _ScheduleMultiLectureWidget extends ScheduleRowWidget {
         status: ScheduleRowWidgetConfigurationProgressStatus.coming,
       ),
     ];
+    const breaks = 3;
 
     return ListView.builder(
       physics: const NeverScrollableScrollPhysics(),
@@ -197,7 +198,7 @@ class _ScheduleMultiLectureWidget extends ScheduleRowWidget {
           ),
         );
       }),
-      itemCount: listOfLectures.length + 3,
+      itemCount: listOfLectures.length + breaks,
     );
   }
 }
