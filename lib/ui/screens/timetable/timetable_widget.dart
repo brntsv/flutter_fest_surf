@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_fest_surf/resources/resources.dart';
 import 'package:flutter_fest_surf/ui/screens/timetable/widgets/schedule_row_lecture_widget.dart';
+import 'package:flutter_fest_surf/ui/screens/timetable/widgets/schedule_row_time_widget.dart';
 import 'package:flutter_fest_surf/ui/screens/timetable/widgets/schedule_row_widget.dart';
 import 'package:flutter_fest_surf/ui/themes/app_text_style.dart';
 import 'package:flutter_fest_surf/ui/themes/app_theme.dart';
@@ -37,7 +38,6 @@ class _ScheduleWidgetState extends State<ScheduleWidget> {
   @override
   Widget build(BuildContext context) {
     final topInset = MediaQuery.of(context).padding.top;
-    final List<ScheduleRowLectureWidgetConfiguration> _listOfLectures = [];
 
     return SafeArea(
       top: false,
@@ -67,27 +67,40 @@ class _ScheduleWidgetState extends State<ScheduleWidget> {
                       child: const Text('data'))),
               // /////////  TEST   ////////////
               SliverList(
-                delegate:
-                    // SliverChildListDelegate([
-                    //   Padding(
-                    //     padding: const EdgeInsets.only(top: 16, left: 20, right: 20),
-                    //     child: ScheduleRowWidget.multi(key: key),
-                    //   ),
-                    // ]),
+                delegate: SliverChildListDelegate([ScheduleRowWidget.multi()]),
 
-                    SliverChildBuilderDelegate(
-                  (context, index) {
-                    // if ((index + 1) % 3 == 0) {
-                    //   return const Padding(
-                    //     padding: EdgeInsets.only(left: 14, right: 14, top: 16),
-                    //     child:
-                    //         SizedBox(height: 70, child: ScheduleRowBreakWidget()),
-                    //   );
-                    // }
-                    return ScheduleRowWidget.multi();
-                  },
-                  childCount: 1,
-                ),
+                // delegate: SliverChildBuilderDelegate(
+                //   (context, index) {
+                //     // if ((index + 1) % 3 == 0) {
+                //     //   return const Padding(
+                //     //     padding: EdgeInsets.only(left: 14, right: 14, top: 16),
+                //     //     child: SizedBox(
+                //     //         height: 70, child: ScheduleRowBreakWidget()),
+                //     //   );
+                //     // }
+                //     return ScheduleRowWidget.multi();
+                //   },
+                //   childCount: 1,
+                // ),
+
+                // delegate: SliverChildBuilderDelegate((context, index) {
+                //   return Padding(
+                //     padding:
+                //         const EdgeInsets.only(top: 16, left: 20, right: 20),
+                //     child: IntrinsicHeight(
+                //       child: Row(
+                //         children: [
+                //           ScheduleRowTimeWidget(
+                //               configuration: listOfTime[index]),
+                //           Expanded(
+                //             child: ScheduleRowLectureWidget(
+                //                 configuration: listOfLectures[index]),
+                //           ),
+                //         ],
+                //       ),
+                //     ),
+                //   );
+                // }),
               ),
             ],
           ),

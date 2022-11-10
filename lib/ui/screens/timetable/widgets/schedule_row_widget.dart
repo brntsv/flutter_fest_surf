@@ -52,7 +52,6 @@ class _ScheduleMultiLectureWidget extends ScheduleRowWidget {
 
   @override
   Widget build(BuildContext context) {
-    var index = 0;
     List<ScheduleRowLectureWidgetConfiguration> listOfLectures = [
       const ScheduleRowLectureWidgetConfiguration(
         avatarUrl:
@@ -156,119 +155,26 @@ class _ScheduleMultiLectureWidget extends ScheduleRowWidget {
       ),
     ];
 
-    return Column(
-      children: [
-        Padding(
+    return ListView.builder(
+      physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      itemBuilder: ((context, index) {
+        return Padding(
           padding: const EdgeInsets.only(top: 16, left: 20, right: 20),
           child: IntrinsicHeight(
             child: Row(
               children: [
-                ScheduleRowTimeWidget(configuration: listOfTime[0]),
+                ScheduleRowTimeWidget(configuration: listOfTime[index]),
                 Expanded(
                   child: ScheduleRowLectureWidget(
-                      configuration: listOfLectures[0]),
+                      configuration: listOfLectures[index]),
                 ),
               ],
             ),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 16, left: 20, right: 20),
-          child: IntrinsicHeight(
-            child: Row(
-              children: [
-                ScheduleRowTimeWidget(configuration: listOfTime[1]),
-                Expanded(
-                  child: ScheduleRowLectureWidget(
-                      configuration: listOfLectures[1]),
-                ),
-              ],
-            ),
-          ),
-        ),
-        const Padding(
-          padding: EdgeInsets.only(left: 14, right: 14, top: 16),
-          child: SizedBox(height: 70, child: ScheduleRowBreakWidget()),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 16, left: 20, right: 20),
-          child: IntrinsicHeight(
-            child: Row(
-              children: [
-                ScheduleRowTimeWidget(configuration: listOfTime[2]),
-                Expanded(
-                  child: ScheduleRowLectureWidget(
-                      configuration: listOfLectures[2]),
-                ),
-              ],
-            ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 16, left: 20, right: 20),
-          child: IntrinsicHeight(
-            child: Row(
-              children: [
-                ScheduleRowTimeWidget(configuration: listOfTime[3]),
-                Expanded(
-                  child: ScheduleRowLectureWidget(
-                      configuration: listOfLectures[3]),
-                ),
-              ],
-            ),
-          ),
-        ),
-        const Padding(
-          padding: EdgeInsets.only(left: 14, right: 14, top: 16),
-          child: SizedBox(height: 70, child: ScheduleRowBreakWidget()),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 16, left: 20, right: 20),
-          child: IntrinsicHeight(
-            child: Row(
-              children: [
-                ScheduleRowTimeWidget(configuration: listOfTime[4]),
-                Expanded(
-                  child: ScheduleRowLectureWidget(
-                      configuration: listOfLectures[4]),
-                ),
-              ],
-            ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 16, left: 20, right: 20),
-          child: IntrinsicHeight(
-            child: Row(
-              children: [
-                ScheduleRowTimeWidget(configuration: listOfTime[5]),
-                Expanded(
-                  child: ScheduleRowLectureWidget(
-                      configuration: listOfLectures[5]),
-                ),
-              ],
-            ),
-          ),
-        ),
-        const Padding(
-          padding: EdgeInsets.only(left: 14, right: 14, top: 16),
-          child: SizedBox(height: 70, child: ScheduleRowBreakWidget()),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 16, left: 20, right: 20),
-          child: IntrinsicHeight(
-            child: Row(
-              children: [
-                ScheduleRowTimeWidget(configuration: listOfTime[6]),
-                Expanded(
-                  child: ScheduleRowLectureWidget(
-                      configuration: listOfLectures[6]),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ],
+        );
+      }),
+      itemCount: listOfLectures.length,
     );
   }
 }
