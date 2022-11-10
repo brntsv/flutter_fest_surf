@@ -159,6 +159,29 @@ class _ScheduleMultiLectureWidget extends ScheduleRowWidget {
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemBuilder: ((context, index) {
+        if ((index + 1) % 3 == 0) {
+          listOfLectures.insert(
+              index,
+              const ScheduleRowLectureWidgetConfiguration(
+                avatarUrl: '',
+                isFavourite: false,
+                jobTitle: '',
+                lectureTitle: '',
+                speakerName: '',
+                status: ScheduleRowWidgetConfigurationProgressStatus.coming,
+              ));
+          listOfTime.insert(
+              index,
+              const ScheduleRowTimeWidgetConfiguration(
+                startTime: '',
+                endTime: '',
+                status: ScheduleRowWidgetConfigurationProgressStatus.coming,
+              ));
+          return const Padding(
+            padding: EdgeInsets.only(left: 14, right: 14, top: 16),
+            child: SizedBox(height: 70, child: ScheduleRowBreakWidget()),
+          );
+        }
         return Padding(
           padding: const EdgeInsets.only(top: 16, left: 20, right: 20),
           child: IntrinsicHeight(
@@ -174,7 +197,7 @@ class _ScheduleMultiLectureWidget extends ScheduleRowWidget {
           ),
         );
       }),
-      itemCount: listOfLectures.length,
+      itemCount: listOfLectures.length + 3,
     );
   }
 }

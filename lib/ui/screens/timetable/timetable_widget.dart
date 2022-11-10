@@ -68,39 +68,6 @@ class _ScheduleWidgetState extends State<ScheduleWidget> {
               // /////////  TEST   ////////////
               SliverList(
                 delegate: SliverChildListDelegate([ScheduleRowWidget.multi()]),
-
-                // delegate: SliverChildBuilderDelegate(
-                //   (context, index) {
-                //     // if ((index + 1) % 3 == 0) {
-                //     //   return const Padding(
-                //     //     padding: EdgeInsets.only(left: 14, right: 14, top: 16),
-                //     //     child: SizedBox(
-                //     //         height: 70, child: ScheduleRowBreakWidget()),
-                //     //   );
-                //     // }
-                //     return ScheduleRowWidget.multi();
-                //   },
-                //   childCount: 1,
-                // ),
-
-                // delegate: SliverChildBuilderDelegate((context, index) {
-                //   return Padding(
-                //     padding:
-                //         const EdgeInsets.only(top: 16, left: 20, right: 20),
-                //     child: IntrinsicHeight(
-                //       child: Row(
-                //         children: [
-                //           ScheduleRowTimeWidget(
-                //               configuration: listOfTime[index]),
-                //           Expanded(
-                //             child: ScheduleRowLectureWidget(
-                //                 configuration: listOfLectures[index]),
-                //           ),
-                //         ],
-                //       ),
-                //     ),
-                //   );
-                // }),
               ),
             ],
           ),
