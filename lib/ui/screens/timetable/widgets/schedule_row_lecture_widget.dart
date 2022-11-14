@@ -17,8 +17,7 @@ class ScheduleRowLectureWidget extends StatelessWidget {
       children: [
         Container(
           padding:
-              const EdgeInsets.only(top: 4, left: 16, right: 12, bottom: 16),
-          // margin: const EdgeInsets.only(top: 16, left: 16, right: 16),
+              const EdgeInsets.only(top: 15, left: 16, right: 12, bottom: 15),
           decoration: BoxDecoration(
               color: configuration._style.widgetBackground,
               // gradient: RadialGradient(
@@ -34,28 +33,27 @@ class ScheduleRowLectureWidget extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                children: [
-                  Expanded(
-                      child: _SpeakerWidget(
-                    configuration: configuration,
-                  )),
-                  _FavouriteWidget(
-                    configuration: configuration,
-                  ),
-                ],
-              ),
+              _SpeakerWidget(configuration: configuration),
+              const SizedBox(height: 14),
               _DescriptionWidget(configuration: configuration),
             ],
           ),
         ),
         Card(
+          elevation: 0,
           color: Colors.transparent,
           child: InkWell(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(20),
             onTap: () {
               Navigator.of(context).pushNamed(Screens.lectureDetails);
             },
+          ),
+        ),
+        Positioned(
+          right: 12,
+          top: 4,
+          child: _FavouriteWidget(
+            configuration: configuration,
           ),
         ),
       ],
