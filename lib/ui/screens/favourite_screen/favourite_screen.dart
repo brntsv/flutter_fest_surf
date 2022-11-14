@@ -80,10 +80,17 @@ class _HeaderWidget extends StatelessWidget {
   }
 }
 
-class _NotificationControlWidget extends StatelessWidget {
-  const _NotificationControlWidget({
-    Key? key,
-  }) : super(key: key);
+class _NotificationControlWidget extends StatefulWidget {
+  const _NotificationControlWidget({Key? key}) : super(key: key);
+
+  @override
+  State<_NotificationControlWidget> createState() =>
+      _NotificationControlWidgetState();
+}
+
+class _NotificationControlWidgetState
+    extends State<_NotificationControlWidget> {
+  bool _isSwitched = true;
 
   @override
   Widget build(BuildContext context) {
@@ -115,8 +122,12 @@ class _NotificationControlWidget extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                 child: CupertinoSwitch(
-                  value: true,
-                  onChanged: (value) {},
+                  value: _isSwitched,
+                  onChanged: (newValue) {
+                    setState(() {
+                      _isSwitched = newValue;
+                    });
+                  },
                   activeColor: AppColors.green,
                   thumbColor: AppColors.darkSecondary,
                   trackColor: AppColors.darkText,
