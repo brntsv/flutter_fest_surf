@@ -56,14 +56,6 @@ class _ScheduleWidgetState extends State<ScheduleWidget> {
                 pinned: true,
                 delegate: _SliverAppBarDelegate(topInset: topInset),
               ),
-              // /////////  TEST   ////////////
-              SliverToBoxAdapter(
-                  child: ElevatedButton(
-                      onPressed: () {
-                        return showOverlay(context);
-                      },
-                      child: const Text('data'))),
-              // /////////  TEST   ////////////
               SliverList(
                 delegate: SliverChildListDelegate([ScheduleRowWidget.multi()]),
               ),

@@ -4,6 +4,8 @@ import 'package:flutter_fest_surf/resources/resources.dart';
 import 'package:flutter_fest_surf/ui/themes/app_text_style.dart';
 import 'package:flutter_fest_surf/ui/themes/app_theme.dart';
 import 'package:flutter_fest_surf/ui/widgets/easter_egg/easter_egg_bird_widget.dart';
+import 'package:flutter_fest_surf/ui/widgets/top_notifications/top_notification_manager.dart';
+import 'package:provider/provider.dart';
 
 class LectureDetailsScreen extends StatefulWidget {
   const LectureDetailsScreen({Key? key}) : super(key: key);
@@ -335,6 +337,18 @@ class _AddToFavouriteButton extends StatelessWidget {
   final isFavourite = false;
   const _AddToFavouriteButton({Key? key}) : super(key: key);
 
+  void showOverlay(BuildContext context) {
+    context.read<TopNotificationManager>().show('Лекция добавлена в избранное');
+
+    // showDialog<String>(
+    //   context: context,
+    //   builder: (BuildContext context) => BackdropFilter(
+    //     filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
+    //     child: const DialogWidgetIos(),
+    //   ),
+    // );
+  }
+
   @override
   Widget build(BuildContext context) {
     final text = isFavourite ? 'В программе' : 'В мою программу';
@@ -350,7 +364,9 @@ class _AddToFavouriteButton extends StatelessWidget {
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 300),
           child: ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              showOverlay(context);
+            },
             style: ButtonStyle(
               foregroundColor: MaterialStateProperty.all(Colors.white),
               elevation: MaterialStateProperty.all(0),

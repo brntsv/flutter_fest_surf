@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 import 'package:flutter_fest_surf/resources/resources.dart';
@@ -5,6 +7,9 @@ import 'package:flutter_fest_surf/ui/navigation/main_navigation.dart';
 import 'package:flutter_fest_surf/ui/screens/timetable/widgets/schedule_row_widget.dart';
 import 'package:flutter_fest_surf/ui/themes/app_text_style.dart';
 import 'package:flutter_fest_surf/ui/themes/app_theme.dart';
+import 'package:flutter_fest_surf/ui/widgets/dialogs/dialog_widget_ios.dart';
+import 'package:flutter_fest_surf/ui/widgets/top_notifications/top_notification_manager.dart';
+import 'package:provider/provider.dart';
 
 class ScheduleRowLectureWidget extends StatelessWidget {
   final ScheduleRowLectureWidgetConfiguration configuration;
@@ -97,12 +102,26 @@ class _FavouriteWidget extends StatelessWidget {
   const _FavouriteWidget({Key? key, required this.configuration})
       : super(key: key);
 
+  void showOverlay(BuildContext context) {
+    context.read<TopNotificationManager>().show('Лекция добавлена в избранное');
+
+    // showDialog<String>(
+    //   context: context,
+    //   builder: (BuildContext context) => BackdropFilter(
+    //     filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
+    //     child: const DialogWidgetIos(),
+    //   ),
+    // );
+  }
+
   @override
   Widget build(BuildContext context) {
     return IconButton(
       splashColor: Colors.transparent,
       highlightColor: Colors.transparent,
-      onPressed: () {},
+      onPressed: () {
+        showOverlay(context);
+      },
       icon: Image.asset(
         configuration._favouriteStyle.favouriteButtonIcon,
         color: configuration._favouriteStyle.favouriteButtonColor,
