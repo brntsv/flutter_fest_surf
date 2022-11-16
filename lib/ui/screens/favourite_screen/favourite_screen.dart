@@ -1,8 +1,12 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_fest_surf/ui/screens/timetable/model/lectures_model.dart';
+import 'package:flutter_fest_surf/ui/screens/timetable/widgets/schedule_row_lecture_widget.dart';
+import 'package:flutter_fest_surf/ui/screens/timetable/widgets/schedule_row_time_widget.dart';
 import 'package:flutter_fest_surf/ui/screens/timetable/widgets/schedule_row_widget.dart';
 import 'package:flutter_fest_surf/ui/themes/app_text_style.dart';
 import 'package:flutter_fest_surf/ui/themes/app_theme.dart';
 import 'package:flutter_fest_surf/ui/widgets/easter_egg/easter_egg_bird_widget.dart';
+import 'package:provider/provider.dart';
 
 class FavourireScreenWidget extends StatefulWidget {
   const FavourireScreenWidget({Key? key}) : super(key: key);
@@ -16,6 +20,9 @@ class _FavourireScreenWidgetState extends State<FavourireScreenWidget> {
 
   @override
   Widget build(BuildContext context) {
+    var favourites = context.watch<LecturesModel>().favourites;
+    var timeOfLectures = context.watch<LecturesModel>().timeOfLectures;
+
     return SafeArea(
       top: false,
       child: Stack(
@@ -38,10 +45,21 @@ class _FavourireScreenWidgetState extends State<FavourireScreenWidget> {
                     return Padding(
                       padding:
                           const EdgeInsets.only(top: 16, left: 20, right: 20),
-                      child: ScheduleRowWidget.single(),
+                      child: IntrinsicHeight(
+                        child: Row(
+                          children: [
+                            ScheduleRowTimeWidget(
+                                configuration: timeOfLectures[index]),
+                            Expanded(
+                              child: ScheduleRowLectureWidget(
+                                  configuration: favourites[index]),
+                            ),
+                          ],
+                        ),
+                      ),
                     );
                   },
-                  childCount: 10,
+                  childCount: favourites.length,
                 ),
               ),
             ],
