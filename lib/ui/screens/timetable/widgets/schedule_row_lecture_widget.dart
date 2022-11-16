@@ -1,9 +1,8 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 import 'package:flutter_fest_surf/resources/resources.dart';
 import 'package:flutter_fest_surf/ui/navigation/main_navigation.dart';
+import 'package:flutter_fest_surf/ui/screens/timetable/model/lectures_model.dart';
 import 'package:flutter_fest_surf/ui/screens/timetable/widgets/schedule_row_widget.dart';
 import 'package:flutter_fest_surf/ui/themes/app_text_style.dart';
 import 'package:flutter_fest_surf/ui/themes/app_theme.dart';
@@ -96,11 +95,16 @@ class _SpeakerWidget extends StatelessWidget {
   }
 }
 
-class _FavouriteWidget extends StatelessWidget {
+class _FavouriteWidget extends StatefulWidget {
   final ScheduleRowLectureWidgetConfiguration configuration;
   const _FavouriteWidget({Key? key, required this.configuration})
       : super(key: key);
 
+  @override
+  State<_FavouriteWidget> createState() => _FavouriteWidgetState();
+}
+
+class _FavouriteWidgetState extends State<_FavouriteWidget> {
   void showOverlay(BuildContext context) {
     context.read<TopNotificationManager>().show('Лекция добавлена в избранное');
 
@@ -115,15 +119,35 @@ class _FavouriteWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var favourites = context.watch<LecturesModel>().favourites;
+    var lectures = context.watch<LecturesModel>().lectures;
+
+    // var isInFavouritePage = context.select<LecturesModel, bool>(
+    //     (favouritePage) => favouritePage.favourites.contains(lectures));
+
+    var index = 0;
+
     return IconButton(
       splashColor: Colors.transparent,
       highlightColor: Colors.transparent,
       onPressed: () {
         showOverlay(context);
+
+        for (var i = 0; i < lectures.length; i++) {
+          if (!favourites.contains(lectures[index])) {
+            context.read<LecturesModel>().addToList(lectures[index]);
+            widget.configuration.isFavourite = true;
+          } else {
+            context.read<LecturesModel>().removeFromList(lectures[index]);
+            widget.configuration.isFavourite = false;
+          }
+          index++;
+        }
+        print(favourites);
       },
       icon: Image.asset(
-        configuration._favouriteStyle.favouriteButtonIcon,
-        color: configuration._favouriteStyle.favouriteButtonColor,
+        widget.configuration._favouriteStyle.favouriteButtonIcon,
+        color: widget.configuration._favouriteStyle.favouriteButtonColor,
       ),
     );
   }
@@ -176,7 +200,7 @@ class ScheduleRowLectureWidgetConfiguration {
   final String speakerName;
   final String lectureTitle;
   final String jobTitle;
-  final bool isFavourite;
+  bool isFavourite;
   // статус прогресса
   final ScheduleRowWidgetConfigurationProgressStatus status;
 
@@ -195,7 +219,7 @@ class ScheduleRowLectureWidgetConfiguration {
   _ScheduleRowLectureWidgetConfigurationFavouriteStyle get _favouriteStyle =>
       isFavourite ? isFavouriteStyle : isNotFavouriteStyle;
 
-  const ScheduleRowLectureWidgetConfiguration({
+  ScheduleRowLectureWidgetConfiguration({
     required this.avatarUrl,
     required this.speakerName,
     required this.lectureTitle,
