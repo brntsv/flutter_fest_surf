@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_fest_surf/ui/screens/favourite_screen/model/favourites_model.dart';
+import 'package:flutter_fest_surf/ui/screens/timetable/model/lectures_model.dart';
 import 'package:flutter_fest_surf/ui/screens/timetable/widgets/schedule_row_break_widget.dart';
 import 'package:flutter_fest_surf/ui/screens/timetable/widgets/schedule_row_lecture_widget.dart';
 import 'package:flutter_fest_surf/ui/screens/timetable/widgets/schedule_row_time_widget.dart';
@@ -21,7 +21,7 @@ class _ScheduleSingleLectureWidget extends ScheduleRowWidget {
   @override
   Widget build(BuildContext context) {
     const progressStatus = ScheduleRowWidgetConfigurationProgressStatus.coming;
-    const configLecture = ScheduleRowLectureWidgetConfiguration(
+    var configLecture = ScheduleRowLectureWidgetConfiguration(
       avatarUrl:
           'https://hiphop4real.com/wp-content/uploads/2017/06/YUriy-Dud.jpg',
       speakerName: 'Юрий Дудь',
@@ -39,8 +39,8 @@ class _ScheduleSingleLectureWidget extends ScheduleRowWidget {
 
     return IntrinsicHeight(
       child: Row(
-        children: const [
-          ScheduleRowTimeWidget(configuration: configTime),
+        children: [
+          const ScheduleRowTimeWidget(configuration: configTime),
           Expanded(
               child: ScheduleRowLectureWidget(configuration: configLecture)),
         ],
@@ -54,8 +54,8 @@ class _ScheduleMultiLectureWidget extends ScheduleRowWidget {
 
   @override
   Widget build(BuildContext context) {
-    var lectures = context.watch<FavouritesModel>().lectures;
-    var timeOfLectures = context.watch<FavouritesModel>().timeOfLectures;
+    var lectures = context.watch<LecturesModel>().lectures;
+    var timeOfLectures = context.watch<LecturesModel>().timeOfLectures;
 
     return ListView.separated(
       physics: const NeverScrollableScrollPhysics(),
@@ -78,7 +78,6 @@ class _ScheduleMultiLectureWidget extends ScheduleRowWidget {
           ),
         );
       }),
-      // !!!!!!!!! listOfLectures
       separatorBuilder: (context, index) {
         if ((index + 1) % 2 == 0) {
           return const Padding(
