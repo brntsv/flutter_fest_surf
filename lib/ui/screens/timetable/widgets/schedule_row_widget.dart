@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_fest_surf/ui/screens/favourite_screen/model/favourites_model.dart';
 import 'package:flutter_fest_surf/ui/screens/timetable/widgets/schedule_row_break_widget.dart';
 import 'package:flutter_fest_surf/ui/screens/timetable/widgets/schedule_row_lecture_widget.dart';
 import 'package:flutter_fest_surf/ui/screens/timetable/widgets/schedule_row_time_widget.dart';
+import 'package:provider/provider.dart';
 
 abstract class ScheduleRowWidget extends StatelessWidget {
   const ScheduleRowWidget({Key? key}) : super(key: key);
@@ -52,153 +54,44 @@ class _ScheduleMultiLectureWidget extends ScheduleRowWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<ScheduleRowLectureWidgetConfiguration> listOfLectures = [
-      const ScheduleRowLectureWidgetConfiguration(
-        avatarUrl:
-            'https://i0.wp.com/sova.ponominalu.ru/wp-content/uploads/2018/04/post-malone.jpg?fit=800%2C600&ssl=1',
-        speakerName: 'Алексей Чулпин',
-        lectureTitle: 'Субъективность в оценке дизайна',
-        jobTitle: 'Дизайн-директор Яндекс.Маркет',
-        isFavourite: false,
-        status: ScheduleRowWidgetConfigurationProgressStatus.coming,
-      ),
-      const ScheduleRowLectureWidgetConfiguration(
-        avatarUrl:
-            'https://tagline.ru/file/person/photo/2018/grigory-kochenov.png',
-        speakerName: 'Гриша Коченов',
-        lectureTitle: 'Непрошенная мораль про веб-дизайн',
-        jobTitle: 'Креативный директор Agima',
-        isFavourite: false,
-        status: ScheduleRowWidgetConfigurationProgressStatus.coming,
-      ),
-      const ScheduleRowLectureWidgetConfiguration(
-        avatarUrl:
-            'https://greatheart.ru/assets/img/birthday/maksim-ponomarev.png',
-        speakerName: 'Максим Понаморев',
-        lectureTitle: 'Личный бренд в творческой профессии',
-        jobTitle: 'Ведущий разработчик МТС',
-        isFavourite: false,
-        status: ScheduleRowWidgetConfigurationProgressStatus.coming,
-      ),
-      const ScheduleRowLectureWidgetConfiguration(
-        avatarUrl:
-            'https://hiphop4real.com/wp-content/uploads/2017/06/YUriy-Dud.jpg',
-        speakerName: 'Юрий Дудь',
-        lectureTitle: 'Как не стесняться вопроса "Сколько ты зарабатываешь?"',
-        jobTitle: 'блогер',
-        isFavourite: false,
-        status: ScheduleRowWidgetConfigurationProgressStatus.coming,
-      ),
-      const ScheduleRowLectureWidgetConfiguration(
-        avatarUrl:
-            'https://pbs.twimg.com/profile_images/442246336553840640/tmlikWP-_400x400.jpeg',
-        speakerName: 'Артём Малышев',
-        lectureTitle: 'Продюсирование проектов и творческий взгляд',
-        jobTitle: 'Подкаст "мы обречены"',
-        isFavourite: false,
-        status: ScheduleRowWidgetConfigurationProgressStatus.coming,
-      ),
-      const ScheduleRowLectureWidgetConfiguration(
-        avatarUrl:
-            'https://images.ctfassets.net/9n3x4rtjlya6/47d55e95eURFdV4mlWzuur/ac7f0780a6ebba3f5cfa1a96fc54eaab/___________________.jpg',
-        speakerName: 'Фил Ранжин',
-        lectureTitle: 'Масштабирование проекта с ограниченными ресурсами',
-        jobTitle: 'С# разработчик',
-        isFavourite: false,
-        status: ScheduleRowWidgetConfigurationProgressStatus.coming,
-      ),
-      const ScheduleRowLectureWidgetConfiguration(
-        avatarUrl:
-            'https://yt3.ggpht.com/ytc/AMLnZu89Ctj5mdefLspTmrKyy8VEBepwP38o8kBHvldVbg=s900-c-k-c0x00ffffff-no-rj',
-        speakerName: 'Егор Малькевич',
-        lectureTitle: 'Мотитвация себя и других',
-        jobTitle: 'стартапы',
-        isFavourite: false,
-        status: ScheduleRowWidgetConfigurationProgressStatus.coming,
-      ),
-    ];
-    List<ScheduleRowTimeWidgetConfiguration> listOfTime = [
-      const ScheduleRowTimeWidgetConfiguration(
-        startTime: '  8:00',
-        endTime: '  9:30',
-        status: ScheduleRowWidgetConfigurationProgressStatus.coming,
-      ),
-      const ScheduleRowTimeWidgetConfiguration(
-        startTime: '  9:35',
-        endTime: '11:00',
-        status: ScheduleRowWidgetConfigurationProgressStatus.coming,
-      ),
-      const ScheduleRowTimeWidgetConfiguration(
-        startTime: '11:30',
-        endTime: '13:00',
-        status: ScheduleRowWidgetConfigurationProgressStatus.coming,
-      ),
-      const ScheduleRowTimeWidgetConfiguration(
-        startTime: '13:05',
-        endTime: '14:30',
-        status: ScheduleRowWidgetConfigurationProgressStatus.coming,
-      ),
-      const ScheduleRowTimeWidgetConfiguration(
-        startTime: '15:00',
-        endTime: '16:30',
-        status: ScheduleRowWidgetConfigurationProgressStatus.coming,
-      ),
-      const ScheduleRowTimeWidgetConfiguration(
-        startTime: '16:35',
-        endTime: '17:30',
-        status: ScheduleRowWidgetConfigurationProgressStatus.coming,
-      ),
-      const ScheduleRowTimeWidgetConfiguration(
-        startTime: '18:00',
-        endTime: '19:30',
-        status: ScheduleRowWidgetConfigurationProgressStatus.coming,
-      ),
-    ];
-    const breaks = 3;
+    var lectures = context.watch<FavouritesModel>().lectures;
+    var timeOfLectures = context.watch<FavouritesModel>().timeOfLectures;
 
-    return ListView.builder(
+    return ListView.separated(
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemBuilder: ((context, index) {
-        if ((index + 1) % 3 == 0) {
-          listOfLectures.insert(
-              index,
-              const ScheduleRowLectureWidgetConfiguration(
-                avatarUrl: '',
-                isFavourite: false,
-                jobTitle: '',
-                lectureTitle: '',
-                speakerName: '',
-                status: ScheduleRowWidgetConfigurationProgressStatus.coming,
-              ));
-          listOfTime.insert(
-              index,
-              const ScheduleRowTimeWidgetConfiguration(
-                startTime: '',
-                endTime: '',
-                status: ScheduleRowWidgetConfigurationProgressStatus.coming,
-              ));
-          return const Padding(
-            padding: EdgeInsets.only(left: 14, right: 14, top: 16),
-            child: SizedBox(height: 70, child: ScheduleRowBreakWidget()),
-          );
-        }
         return Padding(
           padding: const EdgeInsets.only(top: 16, left: 20, right: 20),
           child: IntrinsicHeight(
             child: Row(
               children: [
-                ScheduleRowTimeWidget(configuration: listOfTime[index]),
+                // !!!!!!!!!!! listOfTime
+                ScheduleRowTimeWidget(configuration: timeOfLectures[index]),
                 Expanded(
-                  child: ScheduleRowLectureWidget(
-                      configuration: listOfLectures[index]),
+                  child:
+                      // !!!!!!!!! listOfLectures
+                      ScheduleRowLectureWidget(configuration: lectures[index]),
                 ),
               ],
             ),
           ),
         );
       }),
-      itemCount: listOfLectures.length + breaks,
+      // !!!!!!!!! listOfLectures
+      separatorBuilder: (context, index) {
+        if ((index + 1) % 2 == 0) {
+          return const Padding(
+            padding: EdgeInsets.only(left: 14, right: 14, top: 16),
+            child: SizedBox(
+              height: 70,
+              child: ScheduleRowBreakWidget(),
+            ),
+          );
+        }
+        return const SizedBox.shrink();
+      },
+      itemCount: lectures.length,
     );
   }
 }
