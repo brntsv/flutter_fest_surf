@@ -10,12 +10,16 @@ import 'package:flutter_fest_surf/ui/widgets/top_notifications/top_notification_
 import 'package:provider/provider.dart';
 
 class ScheduleRowLectureWidget extends StatelessWidget {
+  final int index;
   final ScheduleRowLectureWidgetConfiguration configuration;
-  const ScheduleRowLectureWidget({Key? key, required this.configuration})
+  const ScheduleRowLectureWidget(
+      {Key? key, required this.configuration, required this.index})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    // var item = context.select<FavouriteListModel, Item>(
+    //     (fevouriteList) => fevouriteList.getByPosition(index));
     return Stack(
       children: [
         Container(
@@ -56,6 +60,7 @@ class ScheduleRowLectureWidget extends StatelessWidget {
           right: 12,
           top: 4,
           child: _FavouriteWidget(
+            index: index,
             configuration: configuration,
           ),
         ),
@@ -95,16 +100,15 @@ class _SpeakerWidget extends StatelessWidget {
   }
 }
 
-class _FavouriteWidget extends StatefulWidget {
+class _FavouriteWidget extends StatelessWidget {
+  final int index;
   final ScheduleRowLectureWidgetConfiguration configuration;
-  const _FavouriteWidget({Key? key, required this.configuration})
-      : super(key: key);
+  const _FavouriteWidget({
+    Key? key,
+    required this.configuration,
+    required this.index,
+  }) : super(key: key);
 
-  @override
-  State<_FavouriteWidget> createState() => _FavouriteWidgetState();
-}
-
-class _FavouriteWidgetState extends State<_FavouriteWidget> {
   void showOverlay(BuildContext context) {
     context.read<TopNotificationManager>().show('Лекция добавлена в избранное');
 
@@ -122,32 +126,23 @@ class _FavouriteWidgetState extends State<_FavouriteWidget> {
     var favourites = context.watch<LecturesModel>().favourites;
     var lectures = context.watch<LecturesModel>().lectures;
 
-    // var isInFavouritePage = context.select<LecturesModel, bool>(
-    //     (favouritePage) => favouritePage.favourites.contains(lectures));
-
-    var index = 0;
-
     return IconButton(
       splashColor: Colors.transparent,
       highlightColor: Colors.transparent,
       onPressed: () {
         showOverlay(context);
-
-        for (var i = 0; i < lectures.length; i++) {
-          if (!favourites.contains(lectures[index])) {
-            context.read<LecturesModel>().addToList(lectures[index]);
-            widget.configuration.isFavourite = true;
-          } else {
-            context.read<LecturesModel>().removeFromList(lectures[index]);
-            widget.configuration.isFavourite = false;
-          }
-          index++;
+        if (!favourites.contains(lectures[index])) {
+          context.read<LecturesModel>().addToList(lectures[index]);
+          configuration.isFavourite = true;
+        } else {
+          context.read<LecturesModel>().removeFromList(lectures[index]);
+          configuration.isFavourite = false;
         }
         print(favourites);
       },
       icon: Image.asset(
-        widget.configuration._favouriteStyle.favouriteButtonIcon,
-        color: widget.configuration._favouriteStyle.favouriteButtonColor,
+        configuration._favouriteStyle.favouriteButtonIcon,
+        color: configuration._favouriteStyle.favouriteButtonColor,
       ),
     );
   }
