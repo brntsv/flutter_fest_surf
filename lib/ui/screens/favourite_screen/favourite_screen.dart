@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_fest_surf/ui/screens/timetable/model/lectures_model.dart';
 import 'package:flutter_fest_surf/ui/screens/timetable/widgets/schedule_row_lecture_widget.dart';
 import 'package:flutter_fest_surf/ui/screens/timetable/widgets/schedule_row_time_widget.dart';
-import 'package:flutter_fest_surf/ui/screens/timetable/widgets/schedule_row_widget.dart';
 import 'package:flutter_fest_surf/ui/themes/app_text_style.dart';
 import 'package:flutter_fest_surf/ui/themes/app_theme.dart';
 import 'package:flutter_fest_surf/ui/widgets/easter_egg/easter_egg_bird_widget.dart';
@@ -52,7 +51,9 @@ class _FavourireScreenWidgetState extends State<FavourireScreenWidget> {
                                 configuration: timeOfLectures[index]),
                             Expanded(
                               child: ScheduleRowLectureWidget(
-                                  configuration: favourites[index]),
+                                configuration: favourites[index],
+                                index: index,
+                              ),
                             ),
                           ],
                         ),

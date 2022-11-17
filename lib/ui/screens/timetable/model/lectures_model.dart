@@ -119,7 +119,7 @@ class LecturesModel extends ChangeNotifier {
   /// Неизменяемое представление расписания.
   List<ScheduleRowTimeWidgetConfiguration> get timeOfLectures => _itemsTime;
 
-  /// Список для любимых лекций
+  /// Список для избраных лекций
   final List<ScheduleRowLectureWidgetConfiguration> _favourites = [];
   List<ScheduleRowLectureWidgetConfiguration> get favourites => _favourites;
 
