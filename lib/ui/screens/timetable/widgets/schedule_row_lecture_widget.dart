@@ -125,6 +125,7 @@ class _FavouriteWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     var favourites = context.watch<LecturesModel>().favourites;
     var lectures = context.watch<LecturesModel>().lectures;
+    var timeOfLectures = context.watch<LecturesModel>().timeOfLectures;
 
     return IconButton(
       splashColor: Colors.transparent,
@@ -133,9 +134,11 @@ class _FavouriteWidget extends StatelessWidget {
         showOverlay(context);
         if (!favourites.contains(lectures[index])) {
           context.read<LecturesModel>().addToList(lectures[index]);
+          context.read<LecturesModel>().addListTime(timeOfLectures[index]);
           configuration.isFavourite = true;
         } else {
           context.read<LecturesModel>().removeFromList(lectures[index]);
+          context.read<LecturesModel>().removeListTime(timeOfLectures[index]);
           configuration.isFavourite = false;
         }
         print(favourites);
