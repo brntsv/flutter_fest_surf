@@ -123,6 +123,11 @@ class LecturesModel extends ChangeNotifier {
   final List<ScheduleRowLectureWidgetConfiguration> _favourites = [];
   List<ScheduleRowLectureWidgetConfiguration> get favourites => _favourites;
 
+  /// Расписание для избраных лекций
+  final List<ScheduleRowTimeWidgetConfiguration> _favouritesTime = [];
+  List<ScheduleRowTimeWidgetConfiguration> get favouritesTime =>
+      _favouritesTime;
+
   /// метод добавления в избраное
   void addToList(ScheduleRowLectureWidgetConfiguration item) {
     _favourites.add(item);
@@ -132,6 +137,18 @@ class LecturesModel extends ChangeNotifier {
   /// метод удаления из избраного
   void removeFromList(ScheduleRowLectureWidgetConfiguration item) {
     _favourites.remove(item);
+    notifyListeners();
+  }
+
+  /// метод добавления в избраное для расписания
+  void addListTime(ScheduleRowTimeWidgetConfiguration item) {
+    _favouritesTime.add(item);
+    notifyListeners();
+  }
+
+  /// метод удаления из избраного для расписания
+  void removeListTime(ScheduleRowTimeWidgetConfiguration item) {
+    _favouritesTime.remove(item);
     notifyListeners();
   }
 }
