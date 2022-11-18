@@ -4,9 +4,13 @@ import 'package:flutter_fest_surf/ui/themes/app_text_style.dart';
 import 'package:flutter_fest_surf/ui/themes/app_theme.dart';
 
 class ScheduleRowTimeWidget extends StatelessWidget {
+  final int index;
   final ScheduleRowTimeWidgetConfiguration configuration;
-  const ScheduleRowTimeWidget({Key? key, required this.configuration})
-      : super(key: key);
+  const ScheduleRowTimeWidget({
+    Key? key,
+    required this.configuration,
+    required this.index,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

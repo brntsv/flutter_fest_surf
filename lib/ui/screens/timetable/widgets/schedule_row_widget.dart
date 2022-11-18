@@ -67,7 +67,10 @@ class _ScheduleMultiLectureWidget extends ScheduleRowWidget {
             child: Row(
               children: [
                 // !!!!!!!!!!! listOfTime
-                ScheduleRowTimeWidget(configuration: timeOfLectures[index]),
+                ScheduleRowTimeWidget(
+                  configuration: timeOfLectures[index],
+                  index: index,
+                ),
                 Expanded(
                   child:
                       // !!!!!!!!! listOfLectures

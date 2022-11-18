@@ -20,7 +20,7 @@ class _FavourireScreenWidgetState extends State<FavourireScreenWidget> {
   @override
   Widget build(BuildContext context) {
     var favourites = context.watch<LecturesModel>().favourites;
-    var timeOfLectures = context.watch<LecturesModel>().timeOfLectures;
+    var favouritesTime = context.watch<LecturesModel>().favouritesTime;
 
     return SafeArea(
       top: false,
@@ -48,7 +48,9 @@ class _FavourireScreenWidgetState extends State<FavourireScreenWidget> {
                         child: Row(
                           children: [
                             ScheduleRowTimeWidget(
-                                configuration: timeOfLectures[index]),
+                              configuration: favouritesTime[index],
+                              index: index,
+                            ),
                             Expanded(
                               child: ScheduleRowLectureWidget(
                                 configuration: favourites[index],
