@@ -18,8 +18,9 @@ class ScheduleRowLectureWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // var item = context.select<FavouriteListModel, Item>(
-    //     (fevouriteList) => fevouriteList.getByPosition(index));
+    final lectures = context.watch<LecturesModel>().lectures;
+    final favourites = context.watch<LecturesModel>().favourites;
+
     return Stack(
       children: [
         Container(
@@ -123,25 +124,33 @@ class _FavouriteWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var favourites = context.watch<LecturesModel>().favourites;
-    var lectures = context.watch<LecturesModel>().lectures;
-    var timeOfLectures = context.watch<LecturesModel>().timeOfLectures;
+    // final lectures = context.watch<LecturesModel>().lectures;
+    // final timeOfLectures = context.watch<LecturesModel>().timeOfLectures;
+    // final favourites = context.watch<LecturesModel>().favourites;
+    //////////////////////////////////////////
+    final provider = Provider.of<LecturesModel>(context);
+    final lectures = provider.lectures;
+    final timeOfLectures = provider.timeOfLectures;
 
     return IconButton(
       splashColor: Colors.transparent,
       highlightColor: Colors.transparent,
       onPressed: () {
         showOverlay(context);
-        if (!favourites.contains(lectures[index])) {
-          context.read<LecturesModel>().addToList(lectures[index]);
-          context.read<LecturesModel>().addListTime(timeOfLectures[index]);
-          configuration.isFavourite = true;
-        } else {
-          context.read<LecturesModel>().removeFromList(lectures[index]);
-          context.read<LecturesModel>().removeListTime(timeOfLectures[index]);
-          configuration.isFavourite = false;
-        }
-        print(favourites);
+        ///////////////////////////////////////
+        provider.toggleFavourite(lectures[index]);
+        provider.toggleFavSchedule(timeOfLectures[index]);
+        ///////////////////////////////////////
+        // context.read<LecturesModel>().toggleFavourite(lectures[index]);
+        // context.read<LecturesModel>().toggleFavSchedule(timeOfLectures[index]);
+        ///////////////////////////////////////
+        provider.isExists(lectures[index])
+            ? configuration.isFavourite = true
+            : configuration.isFavourite = false;
+        ///////////////////////////////////////
+        // context.read<LecturesModel>().isExists(lectures[index])
+        //     ? configuration.isFavourite = true
+        //     : configuration.isFavourite = false;
       },
       icon: Image.asset(
         configuration._favouriteStyle.favouriteButtonIcon,
@@ -194,6 +203,7 @@ class _ScheduleRowLectureWidgetConfigurationFavouriteStyle {
 
 //конфигуратор всех параметров лекции
 class ScheduleRowLectureWidgetConfiguration {
+  final int id;
   final String avatarUrl;
   final String speakerName;
   final String lectureTitle;
@@ -218,6 +228,7 @@ class ScheduleRowLectureWidgetConfiguration {
       isFavourite ? isFavouriteStyle : isNotFavouriteStyle;
 
   ScheduleRowLectureWidgetConfiguration({
+    required this.id,
     required this.avatarUrl,
     required this.speakerName,
     required this.lectureTitle,
@@ -253,3 +264,43 @@ class ScheduleRowLectureWidgetConfiguration {
     favouriteButtonIcon: AppImages.bookmark,
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ // if (!favourites.contains(lectures[index])) {
+        //   context.read<LecturesModel>().addToList(lectures[index]);
+        //   context.read<LecturesModel>().addListTime(timeOfLectures[index]);
+        //   configuration.isFavourite = true;
+        // } else {
+        //   context.read<LecturesModel>().removeFromList(lectures[index]);
+        //   context.read<LecturesModel>().removeListTime(timeOfLectures[index]);
+        //   configuration.isFavourite = false;
+        // }
+        // print(favourites);
+
+        // if (favourites.contains(lectures[index])) {
+        //   context.read<LecturesModel>().removeFromList(lectures[index]);
+        //   context.read<LecturesModel>().removeListTime(timeOfLectures[index]);
+        //   configuration.isFavourite = false;
+        // } else {
+        //   context.read<LecturesModel>().addToList(lectures[index]);
+        //   context.read<LecturesModel>().addListTime(timeOfLectures[index]);
+        //   configuration.isFavourite = true;
+        // }

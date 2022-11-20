@@ -86,11 +86,13 @@ class _ScheduleRowTimeWidgetConfigurationConfigurationStyle {
 }
 
 class ScheduleRowTimeWidgetConfiguration {
+  final int id;
   final String startTime;
   final String endTime;
   final ScheduleRowWidgetConfigurationProgressStatus status;
 
   const ScheduleRowTimeWidgetConfiguration({
+    required this.id,
     required this.startTime,
     required this.endTime,
     required this.status,
