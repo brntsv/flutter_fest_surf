@@ -4,7 +4,9 @@ import 'package:flutter_fest_surf/ui/screens/timetable/widgets/schedule_row_lect
 import 'package:flutter_fest_surf/ui/screens/timetable/widgets/schedule_row_time_widget.dart';
 import 'package:flutter_fest_surf/ui/screens/timetable/widgets/schedule_row_widget.dart';
 
-List<ScheduleRowLectureWidgetConfiguration> listOfLectures = [
+class LectureModel {}
+
+List<ScheduleRowLectureWidgetConfiguration> _listOfLectures = [
   ScheduleRowLectureWidgetConfiguration(
     id: 1,
     avatarUrl:
@@ -75,7 +77,7 @@ List<ScheduleRowLectureWidgetConfiguration> listOfLectures = [
   ),
 ];
 
-List<ScheduleRowTimeWidgetConfiguration> listOfTime = [
+List<ScheduleRowTimeWidgetConfiguration> _listOfTime = [
   const ScheduleRowTimeWidgetConfiguration(
     id: 1,
     startTime: '  8:00',
@@ -120,15 +122,15 @@ List<ScheduleRowTimeWidgetConfiguration> listOfTime = [
   ),
 ];
 
-class LecturesModel extends ChangeNotifier {
+class LecturesProvider extends ChangeNotifier {
   /// Внутреннее приватное состояние лекций.
-  final List<ScheduleRowLectureWidgetConfiguration> _items = listOfLectures;
+  final List<ScheduleRowLectureWidgetConfiguration> _items = _listOfLectures;
 
   /// Неизменяемое представление лекций.
   List<ScheduleRowLectureWidgetConfiguration> get lectures => _items;
 
   /// Внутреннее приватное состояние расписания.
-  final List<ScheduleRowTimeWidgetConfiguration> _itemsTime = listOfTime;
+  final List<ScheduleRowTimeWidgetConfiguration> _itemsTime = _listOfTime;
 
   /// Неизменяемое представление расписания.
   List<ScheduleRowTimeWidgetConfiguration> get timeOfLectures => _itemsTime;

@@ -19,8 +19,8 @@ class _FavourireScreenWidgetState extends State<FavourireScreenWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final favourites = context.watch<LecturesModel>().favourites;
-    final favouritesTime = context.watch<LecturesModel>().favouritesTime;
+    final favourites = context.watch<LecturesProvider>().favourites;
+    final favouritesTime = context.watch<LecturesProvider>().favouritesTime;
 
     return SafeArea(
       top: false,
