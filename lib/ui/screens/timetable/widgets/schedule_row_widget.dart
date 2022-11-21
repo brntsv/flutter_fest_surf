@@ -66,14 +66,14 @@ class _ScheduleMultiLectureWidget extends ScheduleRowWidget {
           child: IntrinsicHeight(
             child: Row(
               children: [
-                // !!!!!!!!!!! listOfTime
+                // listOfTime
                 ScheduleRowTimeWidget(
                   configuration: timeOfLectures[index],
                   index: index,
                 ),
                 Expanded(
                   child:
-                      // !!!!!!!!! listOfLectures
+                      // listOfLectures
                       ScheduleRowLectureWidget(
                     configuration: lectures[index],
                     index: index,
