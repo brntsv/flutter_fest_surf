@@ -19,9 +19,6 @@ class ScheduleRowLectureWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final lectures = context.watch<LecturesModel>().lectures;
-    final favourites = context.watch<LecturesModel>().favourites;
-
     return Stack(
       children: [
         Container(
@@ -125,11 +122,12 @@ class _FavouriteWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final provider = context.watch<LecturesModel>();
-    final lectures = provider.lectures;
-    final timeOfLectures = provider.timeOfLectures;
-    final favourites = provider.favourites;
-    final favouritesTime = provider.favouritesTime;
+    final provider = context.read<LecturesProvider>();
+    final watch = context.watch<LecturesProvider>();
+    final lectures = watch.lectures;
+    final timeOfLectures = watch.timeOfLectures;
+    final favourites = watch.favourites;
+    final favouritesTime = watch.favouritesTime;
     // следим за боттом табом и взависимости от выбранного передаем разные листы
     final currentTabIndex =
         context.select((MainTabsViewModel vm) => vm.currentTabIndex);
@@ -145,13 +143,10 @@ class _FavouriteWidget extends StatelessWidget {
           provider.toggleFavourite(favourites[index]);
           provider.toggleFavSchedule(favouritesTime[index]);
         }
+        // TODO: fix bug with change mark on favourite screen
         provider.isExists(lectures[index])
             ? configuration.isFavourite = true
             : configuration.isFavourite = false;
-        ///////////////////////////////////////
-        // context.read<LecturesModel>().isExists(lectures[index])
-        //     ? configuration.isFavourite = true
-        //     : configuration.isFavourite = false;
       },
       icon: Image.asset(
         configuration._favouriteStyle.favouriteButtonIcon,
@@ -265,43 +260,3 @@ class ScheduleRowLectureWidgetConfiguration {
     favouriteButtonIcon: AppImages.bookmark,
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- // if (!favourites.contains(lectures[index])) {
-        //   context.read<LecturesModel>().addToList(lectures[index]);
-        //   context.read<LecturesModel>().addListTime(timeOfLectures[index]);
-        //   configuration.isFavourite = true;
-        // } else {
-        //   context.read<LecturesModel>().removeFromList(lectures[index]);
-        //   context.read<LecturesModel>().removeListTime(timeOfLectures[index]);
-        //   configuration.isFavourite = false;
-        // }
-        // print(favourites);
-
-        // if (favourites.contains(lectures[index])) {
-        //   context.read<LecturesModel>().removeFromList(lectures[index]);
-        //   context.read<LecturesModel>().removeListTime(timeOfLectures[index]);
-        //   configuration.isFavourite = false;
-        // } else {
-        //   context.read<LecturesModel>().addToList(lectures[index]);
-        //   context.read<LecturesModel>().addListTime(timeOfLectures[index]);
-        //   configuration.isFavourite = true;
-        // }
