@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_fest_surf/resources/resources.dart';
 import 'package:flutter_fest_surf/ui/navigation/main_navigation.dart';
+import 'package:flutter_fest_surf/ui/screens/main/viewmodel/main_view_model.dart';
 import 'package:flutter_fest_surf/ui/screens/timetable/model/lectures_model.dart';
 import 'package:flutter_fest_surf/ui/screens/timetable/widgets/schedule_row_widget.dart';
 import 'package:flutter_fest_surf/ui/themes/app_text_style.dart';
@@ -124,26 +125,26 @@ class _FavouriteWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final lectures = context.watch<LecturesModel>().lectures;
-    // final timeOfLectures = context.watch<LecturesModel>().timeOfLectures;
-    // final favourites = context.watch<LecturesModel>().favourites;
-    //////////////////////////////////////////
-    final provider = Provider.of<LecturesModel>(context);
+    final provider = context.watch<LecturesModel>();
     final lectures = provider.lectures;
     final timeOfLectures = provider.timeOfLectures;
-
+    final favourites = provider.favourites;
+    final favouritesTime = provider.favouritesTime;
+    // следим за боттом табом и взависимости от выбранного передаем разные листы
+    final currentTabIndex =
+        context.select((MainTabsViewModel vm) => vm.currentTabIndex);
     return IconButton(
       splashColor: Colors.transparent,
       highlightColor: Colors.transparent,
       onPressed: () {
         showOverlay(context);
-        ///////////////////////////////////////
-        provider.toggleFavourite(lectures[index]);
-        provider.toggleFavSchedule(timeOfLectures[index]);
-        ///////////////////////////////////////
-        // context.read<LecturesModel>().toggleFavourite(lectures[index]);
-        // context.read<LecturesModel>().toggleFavSchedule(timeOfLectures[index]);
-        ///////////////////////////////////////
+        if (currentTabIndex == 0) {
+          provider.toggleFavourite(lectures[index]);
+          provider.toggleFavSchedule(timeOfLectures[index]);
+        } else if (currentTabIndex == 1) {
+          provider.toggleFavourite(favourites[index]);
+          provider.toggleFavSchedule(favouritesTime[index]);
+        }
         provider.isExists(lectures[index])
             ? configuration.isFavourite = true
             : configuration.isFavourite = false;
