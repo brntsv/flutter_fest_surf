@@ -54,8 +54,8 @@ class _ScheduleMultiLectureWidget extends ScheduleRowWidget {
 
   @override
   Widget build(BuildContext context) {
-    var lectures = context.watch<LecturesProvider>().lectures;
-    var timeOfLectures = context.watch<LecturesProvider>().timeOfLectures;
+    var lectures = context.watch<LecturesModel>().lectures;
+    var timeOfLectures = context.watch<LecturesModel>().timeOfLectures;
 
     return ListView.separated(
       physics: const NeverScrollableScrollPhysics(),

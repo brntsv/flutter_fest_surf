@@ -7,8 +7,7 @@ void main() {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider<LecturesProvider>(
-            create: (_) => LecturesProvider()),
+        ChangeNotifierProvider<LecturesModel>(create: (_) => LecturesModel()),
       ],
       child: MyApp(),
     ),

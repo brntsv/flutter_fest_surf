@@ -122,8 +122,8 @@ class _FavouriteWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final provider = context.read<LecturesProvider>();
-    final watch = context.watch<LecturesProvider>();
+    final provider = context.read<LecturesModel>();
+    final watch = context.watch<LecturesModel>();
     final lectures = watch.lectures;
     final timeOfLectures = watch.timeOfLectures;
     final favourites = watch.favourites;
