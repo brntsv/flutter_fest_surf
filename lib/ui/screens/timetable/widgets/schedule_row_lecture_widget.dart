@@ -139,14 +139,14 @@ class _FavouriteWidget extends StatelessWidget {
         if (currentTabIndex == 0) {
           provider.toggleFavourite(lectures[index]);
           provider.toggleFavSchedule(timeOfLectures[index]);
+          provider.isExists(lectures[index])
+              ? configuration.isFavourite = true
+              : configuration.isFavourite = false;
         } else if (currentTabIndex == 1) {
           provider.toggleFavourite(favourites[index]);
           provider.toggleFavSchedule(favouritesTime[index]);
+          configuration.isFavourite = false;
         }
-        // TODO: fix bug with change mark on favourite screen
-        provider.isExists(lectures[index])
-            ? configuration.isFavourite = true
-            : configuration.isFavourite = false;
       },
       icon: Image.asset(
         configuration._favouriteStyle.favouriteButtonIcon,
