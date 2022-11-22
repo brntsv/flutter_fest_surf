@@ -35,6 +35,7 @@ dependencies:
   flutter_lints: ^2.0.1
   json_annotation: ^4.7.0
   provider: ^6.0.4
+  shared_preferences: ^2.0.15
   spider: ^4.0.0
   yandex_mapkit: ^3.2.0
 
