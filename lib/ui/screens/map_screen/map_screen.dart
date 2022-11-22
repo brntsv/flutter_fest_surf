@@ -23,11 +23,13 @@ class _MapScreenState extends State<MapScreen> {
         mainAxisSize: MainAxisSize.min,
         children: [
           FloatingActionButton(
+            heroTag: '+',
             onPressed: _zoomIn,
             child: const Icon(Icons.add),
           ),
           const SizedBox(height: 16),
           FloatingActionButton(
+            heroTag: '-',
             onPressed: _zoomOut,
             child: const Icon(Icons.remove),
           ),
