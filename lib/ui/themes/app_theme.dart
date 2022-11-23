@@ -17,6 +17,7 @@ abstract class AppTheme {
 abstract class AppColors {
   static const green = Color(0xFF00BD13);
   static const green72 = Color(0xB700BD13);
+  static const greenRadialGradient = Color(0xFF00B90D);
   static const blue = Color(0xFF170AF4);
   static const darkBackground = Color(0xFF000000);
   static const darkSecondary = Color(0xFF101115);
@@ -26,6 +27,11 @@ abstract class AppColors {
   static const white = Color(0xFFFFFFFF);
   static const white72 = Color(0xB7FFFFFF);
   static const white88 = Color(0x8c4FFFFFF);
+  static final radialGradient = [
+    AppColors.greenRadialGradient.withOpacity(0.75),
+    AppColors.darkSecondary.withOpacity(0.75),
+    AppColors.darkSecondary,
+  ];
   static const gradientGreenBlue = [AppColors.green, AppColors.blue];
   static const gradientOff = [AppColors.darkSecondary, AppColors.darkSecondary];
 }

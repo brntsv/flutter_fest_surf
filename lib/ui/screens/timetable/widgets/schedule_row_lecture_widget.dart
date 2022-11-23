@@ -19,6 +19,12 @@ class ScheduleRowLectureWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final favouriteGradient = RadialGradient(
+      radius: 3,
+      colors: AppColors.radialGradient,
+      center: const Alignment(2.1, -2.4),
+      stops: const [0.1, 0.9, 1],
+    );
     return Stack(
       children: [
         Container(
@@ -26,13 +32,7 @@ class ScheduleRowLectureWidget extends StatelessWidget {
               const EdgeInsets.only(top: 15, left: 16, right: 12, bottom: 15),
           decoration: BoxDecoration(
               color: configuration._style.widgetBackground,
-              // gradient: RadialGradient(
-              //   colors: [
-              //     const Color(0xFF00BD13),
-              //     configuration._style.widgetBackground,
-              //   ],
-              //   center: Alignment.topRight,
-              // ),
+              gradient: configuration.isFavourite ? favouriteGradient : null,
               borderRadius: const BorderRadius.all(
                 Radius.circular(20),
               )),
