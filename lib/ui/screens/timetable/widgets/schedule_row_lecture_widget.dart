@@ -109,8 +109,14 @@ class _FavouriteWidget extends StatelessWidget {
   }) : super(key: key);
 
   void showOverlay(BuildContext context) {
-    context.read<TopNotificationManager>().show('Лекция добавлена в избранное');
+    final provider = context.read<TopNotificationManager>();
+    if (configuration.isFavourite == false) {
+      provider.show('Лекция добавлена в программу');
+    } else {
+      provider.show('Лекция удалена из программы');
+    }
 
+    //TODO: порефачить
     // showDialog<String>(
     //   context: context,
     //   builder: (BuildContext context) => BackdropFilter(
