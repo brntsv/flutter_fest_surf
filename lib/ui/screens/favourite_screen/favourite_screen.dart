@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_fest_surf/ui/screens/favourite_screen/data_providers/notification_data_provider.dart';
 import 'package:flutter_fest_surf/ui/screens/timetable/model/lectures_model.dart';
 import 'package:flutter_fest_surf/ui/screens/timetable/widgets/schedule_row_lecture_widget.dart';
 import 'package:flutter_fest_surf/ui/screens/timetable/widgets/schedule_row_time_widget.dart';
@@ -37,7 +38,7 @@ class _FavourireScreenWidgetState extends State<FavourireScreenWidget> {
             physics: const BouncingScrollPhysics(),
             slivers: [
               const _HeaderWidget(),
-              const _NotificationControlWidget(),
+              const NotificationControlWidget(),
               SliverList(
                 delegate: SliverChildBuilderDelegate(
                   (context, index) {
@@ -101,17 +102,35 @@ class _HeaderWidget extends StatelessWidget {
   }
 }
 
-class _NotificationControlWidget extends StatefulWidget {
-  const _NotificationControlWidget({Key? key}) : super(key: key);
+class NotificationControlWidget extends StatefulWidget {
+  const NotificationControlWidget({Key? key}) : super(key: key);
 
   @override
-  State<_NotificationControlWidget> createState() =>
+  State<NotificationControlWidget> createState() =>
       _NotificationControlWidgetState();
 }
 
-class _NotificationControlWidgetState
-    extends State<_NotificationControlWidget> {
-  bool _isSwitched = true;
+class _NotificationControlWidgetState extends State<NotificationControlWidget> {
+  bool _isSwitched = false;
+  final _servicePreferences = NotificationDataProvider();
+
+  @override
+  void initState() {
+    super.initState();
+    _getValue();
+  }
+
+  void _getValue() async {
+    final settings = await _servicePreferences.loadValue();
+    setState(() {
+      _isSwitched = settings.isSwitched;
+    });
+  }
+
+  void _saveValue() {
+    final newSettings = Settings(_isSwitched);
+    _servicePreferences.saveValue(newSettings);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -145,9 +164,8 @@ class _NotificationControlWidgetState
                 child: CupertinoSwitch(
                   value: _isSwitched,
                   onChanged: (newValue) {
-                    setState(() {
-                      _isSwitched = newValue;
-                    });
+                    setState(() => _isSwitched = newValue);
+                    _saveValue();
                   },
                   activeColor: AppColors.green,
                   thumbColor: AppColors.darkSecondary,
