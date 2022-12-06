@@ -5,7 +5,7 @@ List<ScheduleRowLectureWidgetConfiguration> listOfLectures = [
   ScheduleRowLectureWidgetConfiguration(
     id: 1,
     avatarUrl:
-        'https://i0.wp.com/sova.ponominalu.ru/wp-content/uploads/2018/04/post-malone.jpg?fit=800%2C600&ssl=1',
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1fAAVJ5p_lgI5v16ZLbGCO6tTfTMKZnMAM0TPDihb&s',
     speakerName: 'Алексей Чулпин',
     lectureTitle: 'Субъективность в оценке дизайна',
     jobTitle: 'Дизайн-директор Яндекс.Маркет',
@@ -23,7 +23,8 @@ List<ScheduleRowLectureWidgetConfiguration> listOfLectures = [
   ),
   ScheduleRowLectureWidgetConfiguration(
     id: 3,
-    avatarUrl: 'https://greatheart.ru/assets/img/birthday/maksim-ponomarev.png',
+    avatarUrl:
+        'https://pbs.twimg.com/profile_images/1376501554103119872/UKQPlXRK_400x400.jpg',
     speakerName: 'Максим Понаморев',
     lectureTitle: 'Личный бренд в творческой профессии',
     jobTitle: 'Ведущий разработчик МТС',
