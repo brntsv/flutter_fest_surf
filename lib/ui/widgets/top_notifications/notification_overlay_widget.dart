@@ -20,7 +20,7 @@ class NotificationOverlayWidgetState extends State<NotificationOverlayWidget> {
   var _offset = _hidedOffset; // значение по дефолту
   var _text = '';
 
-  List<String> _textsQueue = <String>[];
+  final List<String> _textsQueue = <String>[];
 
   bool get isShowed => _offset == _showedOffset;
 

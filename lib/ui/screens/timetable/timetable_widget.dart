@@ -181,7 +181,7 @@ class _SectionChipsWidget extends StatelessWidget {
                       gradient: LinearGradient(
                         begin: Alignment(-currentGradientStartPoint, 0.0),
                         end: Alignment(currentGradientEndPoint, 0.0),
-                        colors: const [AppColors.green, AppColors.blue],
+                        colors: AppColors.gradientGreenBlue,
                       ),
                       borderRadius:
                           const BorderRadius.all(Radius.circular(80.0))),
