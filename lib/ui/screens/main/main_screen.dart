@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_fest_surf/resources/resources.dart';
 import 'package:flutter_fest_surf/ui/screens/favourite_screen/favourite_screen.dart';
 import 'package:flutter_fest_surf/ui/screens/main/viewmodel/main_view_model.dart';

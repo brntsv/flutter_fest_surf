@@ -16,6 +16,7 @@ class AppImages {
   static const String easterBirdLarge = 'assets/images/easter_bird_large.png';
   static const String metro = 'assets/images/metro.png';
   static const String routes = 'assets/images/1.5x/routes.png';
+  static const String mapPoint = 'assets/images/3x/map_point.png';
 
   static const String avatarChulpin = 'assets/images/avatar_chulpin.jpg';
   static const String avatarKochenov = 'assets/images/avatar_kochenov.png';

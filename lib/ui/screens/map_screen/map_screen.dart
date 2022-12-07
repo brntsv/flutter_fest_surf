@@ -13,10 +13,19 @@ class MapScreen extends StatefulWidget {
 
 class _MapScreenState extends State<MapScreen> {
   late YandexMapController controller;
-  final List<MapObject> mapObjects = [];
+  late final List<MapObject> mapObjects = [mapPoint];
 
-  final MapObjectId targetMapObjectId = const MapObjectId('target_placemark');
   static const Point _point = Point(latitude: 55.692318, longitude: 37.347485);
+  final PlacemarkMapObject mapPoint = PlacemarkMapObject(
+    mapId: const MapObjectId('map_point'),
+    point: const Point(latitude: 55.692318, longitude: 37.347485),
+    opacity: 1,
+    icon: PlacemarkIcon.single(
+      PlacemarkIconStyle(
+        image: BitmapDescriptor.fromAssetImage(AppImages.mapPoint),
+      ),
+    ),
+  );
   final animation = const MapAnimation(
     type: MapAnimationType.smooth,
     duration: 2.0,
@@ -122,6 +131,7 @@ class _MapScreenState extends State<MapScreen> {
               controller = yandexMapController;
               _onMapCreated(controller);
             },
+            mapObjects: mapObjects,
             logoAlignment: const MapAlignment(
                 horizontal: HorizontalAlignment.center,
                 vertical: VerticalAlignment.top),
@@ -134,6 +144,7 @@ class _MapScreenState extends State<MapScreen> {
         padding: const EdgeInsets.only(right: 20, bottom: 20),
         child: FloatingActionButton(
           onPressed: () async {
+            // По этой кнопке должно открываться окно с приложениями карт юзера
             await controller.moveCamera(CameraUpdate.zoomOut(),
                 animation: animation);
           },
