@@ -14,4 +14,6 @@ class AppImages {
       'assets/images/details_gradient_background.png';
   static const String speakerPhoto = 'assets/images/speaker_photo.png';
   static const String easterBirdLarge = 'assets/images/easter_bird_large.png';
+  static const String metro = 'assets/images/metro.png';
+  static const String routes = 'assets/images/1.5x/routes.png';
 }
