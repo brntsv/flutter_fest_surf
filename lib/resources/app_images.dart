@@ -16,4 +16,12 @@ class AppImages {
   static const String easterBirdLarge = 'assets/images/easter_bird_large.png';
   static const String metro = 'assets/images/metro.png';
   static const String routes = 'assets/images/1.5x/routes.png';
+
+  static const String avatarChulpin = 'assets/images/avatar_chulpin.jpg';
+  static const String avatarKochenov = 'assets/images/avatar_kochenov.png';
+  static const String avatarPonamorev = 'assets/images/avatar_ponamorev.jpg';
+  static const String avatarDud = 'assets/images/avatar_dud.jpg';
+  static const String avatarMalyshev = 'assets/images/avatar_malyshev.jpeg';
+  static const String avatarRanzhin = 'assets/images/avatar_ranzhin.jpg';
+  static const String avatarMalkevich = 'assets/images/avatar_malkevich.jpg';
 }

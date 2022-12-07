@@ -78,10 +78,8 @@ class _SpeakerWidget extends StatelessWidget {
     return Row(
       children: [
         CircleAvatar(
-          backgroundImage: NetworkImage(
-            configuration.avatarUrl,
-          ),
           radius: 12,
+          backgroundImage: AssetImage(configuration.avatar),
         ),
         const SizedBox(width: 8),
         Expanded(
@@ -206,7 +204,7 @@ class _ScheduleRowLectureWidgetConfigurationFavouriteStyle {
 //конфигуратор всех параметров лекции
 class ScheduleRowLectureWidgetConfiguration {
   final int id;
-  final String avatarUrl;
+  final String avatar;
   final String speakerName;
   final String lectureTitle;
   final String jobTitle;
@@ -231,7 +229,7 @@ class ScheduleRowLectureWidgetConfiguration {
 
   ScheduleRowLectureWidgetConfiguration({
     required this.id,
-    required this.avatarUrl,
+    required this.avatar,
     required this.speakerName,
     required this.lectureTitle,
     required this.jobTitle,
